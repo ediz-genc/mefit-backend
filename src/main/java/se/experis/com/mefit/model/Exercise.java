@@ -1,10 +1,13 @@
 package se.experis.com.mefit.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,5 +40,8 @@ public class Exercise {
     @Column(name = "fitness_lvl")
     @Enumerated(EnumType.STRING)
     private FitnessLevel fitnessLevel;
+
+    @ManyToMany
+    private Set<Workout> workouts;
 
 }

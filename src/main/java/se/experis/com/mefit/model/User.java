@@ -1,8 +1,11 @@
 package se.experis.com.mefit.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +35,7 @@ public class User {
     @Column(name = "user_length")
     private double length;
 
-    @Column(name = "user_program")
-    private Program program;
+    @ManyToMany(mappedBy = "user")
+    private Set<Goal> goal;
 
 }

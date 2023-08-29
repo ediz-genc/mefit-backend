@@ -5,6 +5,7 @@ import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,10 +32,10 @@ public class Program {
     @Column(name = "program_category")
     private String category;
 
-    // @ManyToMany(mappedBy = "workout_id")
-    // private Set<Workout> workouts;
+    @ManyToMany(mappedBy = "programs")
+    private Set<Workout> workouts;
 
-    // @ManyToMany(mappedBy = "program")
-    // private Set<User> users;
+    @ManyToMany
+    private Set<Goal> goals;
 
 }
