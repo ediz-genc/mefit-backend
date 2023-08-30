@@ -1,7 +1,7 @@
 package se.experis.com.mefit.model;
 
 public enum FitnessLevel {
-    Intensive,
+    Advanced,
     Intermediate,
-    Easy
+    Beginner
 }
