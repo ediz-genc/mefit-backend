@@ -30,20 +30,21 @@ public class ProgramController {
         this.programService = programService;
     }
 
-    @Operation(description = "Get all programs")
+    @Operation(summary = "Get all programs")
+    @GetMapping
     public ResponseEntity<Set<Program>> getAll() {
         Set<Program> programs = programService.findAll();
         return ResponseEntity.ok(programs);
     }
 
-    @Operation(description = "Get a program by given id")
+    @Operation(summary = "Get a program by given id")
     @GetMapping("{id}")
     public ResponseEntity<Program> getById(@PathVariable int id) {
         Program program = programService.findById(id);
         return ResponseEntity.ok(program);
     }
 
-    @Operation(description = "Add new program")
+    @Operation(summary = "Add new program")
     @PostMapping
     public ResponseEntity<Program> addWorkout(@RequestBody Program program) {
         Program newProgram = programService.add(program);
@@ -51,7 +52,7 @@ public class ProgramController {
         return ResponseEntity.created(location).build();
     }
 
-    @Operation(description = "Update existing program with given id")
+    @Operation(summary = "Update existing program with given id")
     @PutMapping("{id}")
     public ResponseEntity<Program> updateProgram(@PathVariable int id, @RequestBody Program program) {
         Program updatedProgram = programService.update(id, program);
@@ -59,7 +60,7 @@ public class ProgramController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(description = "Delete program with given id")
+    @Operation(summary = "Delete program with given id")
     @DeleteMapping("{id}")
     public ResponseEntity<Program> deleteProgram(@PathVariable int id) {
         programService.deleteById(id);

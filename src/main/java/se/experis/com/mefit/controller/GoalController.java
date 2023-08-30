@@ -69,6 +69,7 @@ public class GoalController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Add a program to a goal with a given id")
     @PatchMapping("{id}")
     public ResponseEntity<Goal> addProgram(@PathVariable int id, @RequestBody Set<Program> programs) {
         Goal goalResponse = goalService.addPrograms(programs, id);

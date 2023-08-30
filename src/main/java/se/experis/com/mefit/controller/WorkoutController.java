@@ -30,21 +30,21 @@ public class WorkoutController {
         this.workoutService = workoutService;
     }
 
-    @Operation(description = "Get all workouts")
+    @Operation(summary = "Get all workouts")
     @GetMapping
     public ResponseEntity<Set<Workout>> getAll() {
         Set<Workout> workouts = workoutService.findAll();
         return ResponseEntity.ok(workouts);
     }
 
-    @Operation(description = "Get a workout with a given id")
+    @Operation(summary = "Get a workout with a given id")
     @GetMapping("{id}")
     public ResponseEntity<Workout> getById(@PathVariable int id) {
         Workout workout = workoutService.findById(id);
         return ResponseEntity.ok(workout);
     }
 
-    @Operation(description = "Add a new workout")
+    @Operation(summary = "Add a new workout")
     @PostMapping
     public ResponseEntity<Workout> addWorkout(@RequestBody Workout workout) {
         Workout newWorkout = workoutService.add(workout);
@@ -52,7 +52,7 @@ public class WorkoutController {
         return ResponseEntity.created(location).build();
     }
 
-    @Operation(description = "Update existing workout by given id")
+    @Operation(summary = "Update existing workout by given id")
     @PutMapping("{id}")
     public ResponseEntity<Workout> updateWorkout(@PathVariable int id, @RequestBody Workout workout) {
         Workout updatedWorkout = workoutService.update(id, workout);
@@ -60,7 +60,7 @@ public class WorkoutController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(description = "Delete a workout with given id")
+    @Operation(summary = "Delete a workout with given id")
     @DeleteMapping("{id}")
     public ResponseEntity<Workout> deleteWorkout(@PathVariable int id) {
         workoutService.deleteById(id);
