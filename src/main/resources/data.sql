@@ -24,3 +24,22 @@ VALUES
     ('Dips', 'Arms', 'An upper body exercise targeting the triceps and shoulders.', 'https://example.com/exercise9.jpg', 'https://example.com/exercise9.mp4', 'Advanced'),
     ('Russian Twist', 'Core', 'An abdominal exercise that involves twisting motions.', 'https://example.com/exercise10.jpg', 'https://example.com/exercise10.mp4', 'Intermediate');
 
+INSERT INTO tb_workout (workout_desc, workout_name)
+VALUES 
+    ('Test workout 1', 'Sweatifier'), ('Test workout 2', 'Pumppumppump'), ('Test workout 3', 'Weightwatcher');
+
+INSERT INTO tb_goal (goal_name, start_date, end_date)
+VALUES 
+    ('Week 1', '2023-09-04', '2023-09-10'), ('Week 2', '2023-09-04', '2023-09-10'), ('Week 3', '2023-09-04', '2023-09-10');
+
+INSERT INTO tb_program (program_category, program_desc, program_img_url, program_name)
+VALUES 
+    ('Weight loss', 'Designed to lose weight.', 'https://example.com/program1.jpg', 'Weight loss of D00M!'), ('Muscle increase', 'Buff up!', 'https://example.com/program2.jpg', 'Get big!');
+
+INSERT INTO tb_exercise_workouts (exercises_exercise_id, workouts_workout_id) 
+VALUES
+(1,2), (2,2), (3,2), (4,2), (5,2), (10,1), (9,1), (8,1), (7,1), (6,1);
+
+INSERT INTO tb_goal_user (goal_goal_id, user_user_id)
+VALUES
+(1,1), (2,9), (3,7), (1,8), (2,5);
