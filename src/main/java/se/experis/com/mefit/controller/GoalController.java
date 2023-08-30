@@ -19,6 +19,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.Program;
+import se.experis.com.mefit.model.Workout;
 import se.experis.com.mefit.service.GoalService;
 
 @Tag(name = "Goals", description = "Crud and more for managing goals")
@@ -69,10 +70,18 @@ public class GoalController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "Add a program to a goal with a given id")
+    @Operation(summary = "Add programs to a goal with a given id")
     @PatchMapping("{id}")
-    public ResponseEntity<Goal> addProgram(@PathVariable int id, @RequestBody Set<Program> programs) {
+    public ResponseEntity<Goal> addPrograms(@PathVariable int id, @RequestBody Set<Program> programs) {
         Goal goalResponse = goalService.addPrograms(programs, id);
+        URI location = URI.create("goals/" + goalResponse.getId());
+        return ResponseEntity.created(location).build();
+    }
+
+    @Operation(summary = "Add workouts to a goal with a given id")
+    @PatchMapping("{id}")
+    public ResponseEntity<Goal> addWorkouts(@PathVariable int id, @RequestBody Set<Workout> workouts) {
+        Goal goalResponse = goalService.addWorkouts(workouts, id);
         URI location = URI.create("goals/" + goalResponse.getId());
         return ResponseEntity.created(location).build();
     }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +18,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import se.experis.com.mefit.model.Program;
+import se.experis.com.mefit.model.Workout;
 import se.experis.com.mefit.service.ProgramService;
 
 @Tag(name = "Programs", description = "Crude and more for programs")
@@ -65,6 +67,14 @@ public class ProgramController {
     public ResponseEntity<Program> deleteProgram(@PathVariable int id) {
         programService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Add workouts to a program with a given id")
+    @PatchMapping("{id}")
+    public ResponseEntity<Program> addWorkouts(@PathVariable int id, @RequestBody Set<Workout> workouts) {
+        Program programResponse = programService.addWorkOut(workouts, id);
+        URI location = URI.create("programs/" + programResponse.getId());
+        return ResponseEntity.created(location).build();
     }
 
 }
