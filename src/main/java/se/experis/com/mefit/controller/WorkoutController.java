@@ -71,7 +71,8 @@ public class WorkoutController {
 
     @Operation(summary = "Add exercises to a workout")
     @PatchMapping("{id}")
-    public ResponseEntity<Workout> addExercises(@PathVariable int id, @RequestBody Set<Exercise> exercises) {
+    public ResponseEntity<Workout> addExercises(@PathVariable int id,
+            @RequestBody Set<Exercise> exercises) {
         Workout workoutResponse = workoutService.addExercise(id, exercises);
         URI location = URI.create("workouts/" + workoutResponse.getId());
         return ResponseEntity.created(location).build();

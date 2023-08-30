@@ -71,7 +71,7 @@ public class GoalController {
     }
 
     @Operation(summary = "Add programs to a goal with a given id")
-    @PatchMapping("{id}")
+    @PatchMapping("{id}/program")
     public ResponseEntity<Goal> addPrograms(@PathVariable int id, @RequestBody Set<Program> programs) {
         Goal goalResponse = goalService.addPrograms(programs, id);
         URI location = URI.create("goals/" + goalResponse.getId());
@@ -79,7 +79,7 @@ public class GoalController {
     }
 
     @Operation(summary = "Add workouts to a goal with a given id")
-    @PatchMapping("{id}")
+    @PatchMapping("{id}/workout")
     public ResponseEntity<Goal> addWorkouts(@PathVariable int id, @RequestBody Set<Workout> workouts) {
         Goal goalResponse = goalService.addWorkouts(workouts, id);
         URI location = URI.create("goals/" + goalResponse.getId());
