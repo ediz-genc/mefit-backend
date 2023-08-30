@@ -3,12 +3,14 @@ package se.experis.com.mefit.service;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.Program;
 import se.experis.com.mefit.model.Workout;
 import se.experis.com.mefit.repository.GoalRepository;
 
+@Service
 public class GoalServiceImpl implements GoalService {
 
     private final GoalRepository goalRepository;
