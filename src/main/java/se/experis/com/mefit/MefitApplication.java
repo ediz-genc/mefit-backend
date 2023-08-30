@@ -8,6 +8,7 @@ public class MefitApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MefitApplication.class, args);
+		System.out.println("Running...");
 	}
 
 }
