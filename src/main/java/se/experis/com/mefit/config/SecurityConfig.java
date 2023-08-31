@@ -45,9 +45,9 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authz) -> authz
                         // Allow unauthenticated access to the specified path.
-                        .requestMatchers("/api/v1/resources/public").permitAll()
+                        .requestMatchers("/api/v1/public").permitAll()
                         // Requires users to have the "ADMIN" role to access the specified path.
-                        .requestMatchers("/api/v1/resources/admin").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/admin").hasRole("ADMIN")
                         // Require authentication for any other request (maps to /api/v1/resources/restricted).
                         .anyRequest().authenticated())
 
