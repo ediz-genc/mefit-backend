@@ -8,7 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,8 +35,12 @@ public class Goal {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @ManyToMany()
-    private Set<User> user;
+    @Column(name = "completed")
+    private Boolean completed = false;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToMany(mappedBy = "goals")
     private Set<Program> programs;

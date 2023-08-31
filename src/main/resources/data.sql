@@ -40,10 +40,6 @@ INSERT INTO tb_exercise_workouts (exercises_exercise_id, workouts_workout_id)
 VALUES
 (1,2), (2,2), (3,2), (4,2), (5,2), (10,1), (9,1), (8,1), (7,1), (6,1);
 
-INSERT INTO tb_goal_user (goal_goal_id, user_user_id)
-VALUES
-(1,1), (2,9), (3,7), (1,8), (2,5);
-
 INSERT INTO tb_program_goals (goals_goal_id, programs_program_id)
 VALUES 
 (1,1), (1,2), (2,1), (3,2);
