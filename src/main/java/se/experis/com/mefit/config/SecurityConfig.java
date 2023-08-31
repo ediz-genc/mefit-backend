@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration  // Indicates this class provides configuration for the Spring application.
@@ -28,7 +27,7 @@ public class SecurityConfig {
         /*
          * Convenience for dev to quickly get an application up and running!
          * Compromises on important security aspects.
-         * In a other environments, e.g. production set the proper policies for CORS and enable CSRF.
+         * In another environments, e.g. production set the proper policies for CORS and enable CSRF.
          */
         http
                 .cors(cors -> cors.disable())
@@ -51,6 +50,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/resources/admin").hasRole("ADMIN")
                         // Require authentication for any other request (maps to /api/v1/resources/restricted).
                         .anyRequest().authenticated())
+
+                // .oauth2Client(Customizer.withDefaults())
+                // .oauth2Login(Customizer.withDefaults())
+
                 // Configure the OAuth2 resource server settings for handling JWT-based authentication.
                 .oauth2ResourceServer((oauth2) -> oauth2
                         // Configure JWT-based authentication and sets a custom JWT authentication converter.
