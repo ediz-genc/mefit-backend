@@ -3,11 +3,13 @@ package se.experis.com.mefit.service;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.User;
 import se.experis.com.mefit.repository.UserRepository;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;

@@ -23,7 +23,7 @@ import se.experis.com.mefit.service.UserService;
 
 @Tag(name = "User", description = "Crud and more relating to users")
 @RestController
-@RequestMapping(path = "api/v1/programs")
+@RequestMapping(path = "api/v1/users")
 public class UserController {
     private final UserService userService;
 
