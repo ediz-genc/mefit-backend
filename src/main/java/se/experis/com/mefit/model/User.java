@@ -1,13 +1,17 @@
 package se.experis.com.mefit.model;
 
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,7 +42,34 @@ public class User {
     @Column(name = "user_length")
     private double length;
 
-    @ManyToMany(mappedBy = "user")
-    private Set<Goal> goal;
+    @OneToOne
+    private Goal currentGoal;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Goal> goalHistory;
+
+    public Set<Goal> getGoalHistory() {
+        return goalHistory;
+    }
+
+    @JsonGetter("goalHistory")
+    public Set<String> jsonGetGoalHistory() {
+        if (goalHistory != null) {
+            return goalHistory.stream().map(s -> s.getName()).collect(Collectors.toSet());
+        }
+        return null;
+    }
+
+    public Goal getGoal() {
+        return currentGoal;
+    }
+
+    @JsonGetter("currentGoal")
+    public String jsonGetCurrentGoal() {
+        if (currentGoal != null) {
+            return currentGoal.getName();
+        }
+        return null;
+    }
 
 }
