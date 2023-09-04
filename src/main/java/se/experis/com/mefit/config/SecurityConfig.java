@@ -51,8 +51,8 @@ public class SecurityConfig {
                         // Require authentication for any other request (maps to /api/v1/resources/restricted).
                         .anyRequest().authenticated())
 
-                // .oauth2Client(Customizer.withDefaults())
-                // .oauth2Login(Customizer.withDefaults())
+//                 .oauth2Client(Customizer.withDefaults())
+//                 .oauth2Login(Customizer.withDefaults())
 
                 // Configure the OAuth2 resource server settings for handling JWT-based authentication.
                 .oauth2ResourceServer((oauth2) -> oauth2
