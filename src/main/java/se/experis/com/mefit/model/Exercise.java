@@ -35,13 +35,13 @@ public class Exercise {
     private String description;
 
     @Column(name = "muscle_group", length = 50)
-    public String muscleGroup;
+    private String muscleGroup;
 
     @Column(name = "exercise_img_url")
-    public String imgUrl;
+    private String imgUrl;
 
     @Column(name = "exercise_vid_url")
-    public String vidUrl;
+    private String vidUrl;
 
     @Column(name = "fitness_lvl")
     @Enumerated(EnumType.STRING)
