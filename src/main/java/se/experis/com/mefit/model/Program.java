@@ -1,6 +1,9 @@
 package se.experis.com.mefit.model;
 
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,5 +43,29 @@ public class Program {
 
     @ManyToMany
     private Set<Goal> goals;
+
+    public Set<Goal> getGoals() {
+        return goals;
+    }
+
+    @JsonGetter("goals")
+    public Set<String> jsonGetGoals() {
+        if (goals != null) {
+            return goals.stream().map(s -> s.getName()).collect(Collectors.toSet());
+        }
+        return null;
+    }
+
+    public Set<Workout> getWorkouts() {
+        return workouts;
+    }
+
+    @JsonGetter("workouts")
+    public Set<String> jsonGetWorkouts() {
+        if (workouts != null) {
+            return workouts.stream().map(s -> s.getName()).collect(Collectors.toSet());
+        }
+        return null;
+    }
 
 }
