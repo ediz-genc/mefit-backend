@@ -2,6 +2,7 @@ package se.experis.com.mefit.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -55,7 +56,15 @@ public class SecurityConfig {
                                                 // .requestMatchers("/api/v1/exercises").permitAll()
                                                 // Require authentication for any other request (maps to
                                                 // /api/v1/resources/restricted).
-                                                .anyRequest().permitAll())
+                                                .requestMatchers(HttpMethod.POST, "/exercise").hasRole("Contributor")
+                                                .requestMatchers(HttpMethod.POST, "/program").hasRole("Contributor")
+                                                .requestMatchers(request -> request.getRequestURI().startsWith("/swagger")).permitAll()
+                                                .requestMatchers(request -> request.getRequestURI().startsWith("/v3")).permitAll()
+
+                                                .anyRequest().authenticated()
+                                                )
+                                                
+                                                //.anyRequest().permitAll())
                                 // Configure the OAuth2 resource server settings for handling JWT-based
                                 // authentication.
                                 .oauth2ResourceServer((oauth2) -> oauth2
