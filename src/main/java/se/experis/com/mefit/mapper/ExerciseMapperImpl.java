@@ -6,7 +6,7 @@ import se.experis.com.mefit.model.DTOs.ExerciseDto;
 public class ExerciseMapperImpl extends ExerciseMapper {
 
     @Override
-    public ExerciseDto exerciseDto(Exercise exercise) {
+    public ExerciseDto exerciseToExerciseDto(Exercise exercise) {
         if (exercise == null) {
             return null;
         }
@@ -24,13 +24,31 @@ public class ExerciseMapperImpl extends ExerciseMapper {
     }
 
     @Override
-    public Exercise movieDtoToExercise(ExerciseDto exerciseDto) {
+    public Exercise exerciseDtoToExercise(ExerciseDto exerciseDto) {
         if (exerciseDto == null) {
             return null;
         }
         Exercise exercise = new Exercise();
 
         exercise.setId(exerciseDto.getId());
+        exercise.setName(exerciseDto.getName());
+        exercise.setDescription(exerciseDto.getDescription());
+        exercise.setMuscleGroup(exerciseDto.getMuscleGroup());
+        exercise.setImgUrl(exerciseDto.getImgUrl());
+        exercise.setVidUrl(exerciseDto.getVidUrl());
+        exercise.setFitnessLevel(exerciseDto.getFitnessLevel());
+
+        return exercise;
+    }
+
+    @Override
+    public Exercise patchExerciseDtoToExercise(ExerciseDto exerciseDto, Integer id) {
+        if (exerciseDto == null) {
+            return null;
+        }
+        Exercise exercise = new Exercise();
+
+        exercise.setId(id);
         exercise.setName(exerciseDto.getName());
         exercise.setDescription(exerciseDto.getDescription());
         exercise.setMuscleGroup(exerciseDto.getMuscleGroup());

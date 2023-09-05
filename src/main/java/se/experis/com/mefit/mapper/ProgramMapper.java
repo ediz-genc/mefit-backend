@@ -50,4 +50,6 @@ public abstract class ProgramMapper {
 
     public abstract Program programDtoToProgram(ProgramDto programDto);
 
+    public abstract Program patchProgramDtoTProgram(ProgramDto programDto, Integer id);
+
 }

@@ -59,6 +59,6 @@ public abstract class WorkoutMapper {
         return source.stream().map(s -> exerciseService.findById(s)).collect(Collectors.toSet());
     }
 
-    public abstract Workout exerciseDtoToExercise(WorkoutDto workoutDto);
+    public abstract Workout workoutDtoToWorkout(WorkoutDto workoutDto);
 
 }

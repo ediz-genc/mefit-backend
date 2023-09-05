@@ -2,6 +2,7 @@ package se.experis.com.mefit.controller;
 
 import java.net.URI;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import se.experis.com.mefit.mapper.GoalMapper;
 import se.experis.com.mefit.model.Goal;
-import se.experis.com.mefit.model.Program;
-import se.experis.com.mefit.model.Workout;
+import se.experis.com.mefit.model.DTOs.GoalDto;
 import se.experis.com.mefit.service.GoalService;
 
 @Tag(name = "Goals", description = "Crud and more for managing goals")
@@ -27,38 +28,41 @@ import se.experis.com.mefit.service.GoalService;
 @RequestMapping(path = "api/v1/goals")
 public class GoalController {
     private final GoalService goalService;
+    private final GoalMapper goalMapper;
 
     @Autowired
-    public GoalController(GoalService goalService) {
+    public GoalController(GoalService goalService, GoalMapper goalMapper) {
         this.goalService = goalService;
+        this.goalMapper = goalMapper;
     }
 
     @Operation(summary = "Get all goals")
     @GetMapping
-    public ResponseEntity<Set<Goal>> getAll() {
-        Set<Goal> goals = goalService.findAll();
-        return ResponseEntity.ok(goals);
+    public ResponseEntity<Set<GoalDto>> getAll() {
+        Set<GoalDto> goalDtos = goalService.findAll().stream().map(s -> goalMapper.goalToGoalDto(s))
+                .collect(Collectors.toSet());
+        return ResponseEntity.ok(goalDtos);
     }
 
     @Operation(summary = "Gets the goal with the given id")
     @GetMapping("{id}")
-    public ResponseEntity<Goal> getById(@PathVariable int id) {
-        Goal goal = goalService.findById(id);
-        return ResponseEntity.ok(goal);
+    public ResponseEntity<GoalDto> getById(@PathVariable int id) {
+        GoalDto goalDto = goalMapper.goalToGoalDto(goalService.findById(id));
+        return ResponseEntity.ok(goalDto);
     }
 
     @Operation(summary = "Add a new goal")
     @PostMapping
-    public ResponseEntity<Goal> addGoal(@PathVariable Goal goal) {
-        Goal newGoal = goalService.add(goal);
+    public ResponseEntity<Goal> addGoal(@PathVariable GoalDto goalDto) {
+        Goal newGoal = goalService.add(goalMapper.goalDtoToGoal(goalDto));
         URI location = URI.create("goal/" + newGoal.getId());
         return ResponseEntity.created(location).build();
     }
 
     @Operation(summary = "Update existing goal by given id")
     @PutMapping("{id}")
-    public ResponseEntity<Void> updateGoal(@PathVariable int id, @RequestBody Goal goal) {
-        Goal updatedGoal = goalService.update(id, goal);
+    public ResponseEntity<Void> updateGoal(@PathVariable int id, @RequestBody GoalDto goalDto) {
+        Goal updatedGoal = goalMapper.patchGoalDtoToGoal(goalDto, id);
         goalService.add(updatedGoal);
         return ResponseEntity.noContent().build();
     }
@@ -72,16 +76,16 @@ public class GoalController {
 
     @Operation(summary = "Add programs to a goal with a given id")
     @PatchMapping("{id}/program")
-    public ResponseEntity<Goal> addPrograms(@PathVariable int id, @RequestBody Set<Program> programs) {
-        Goal goalResponse = goalService.addPrograms(programs, id);
+    public ResponseEntity<Void> addPrograms(@PathVariable int id, @RequestBody Set<Integer> programIds) {
+        Goal goalResponse = goalService.addPrograms(goalMapper.mapProgramIdsToPrograms(programIds), id);
         URI location = URI.create("goals/" + goalResponse.getId());
         return ResponseEntity.created(location).build();
     }
 
     @Operation(summary = "Add workouts to a goal with a given id")
     @PatchMapping("{id}/workout")
-    public ResponseEntity<Goal> addWorkouts(@PathVariable int id, @RequestBody Set<Workout> workouts) {
-        Goal goalResponse = goalService.addWorkouts(workouts, id);
+    public ResponseEntity<Void> addWorkouts(@PathVariable int id, @RequestBody Set<Integer> workoutIds) {
+        Goal goalResponse = goalService.addWorkouts(goalMapper.mapWorkoutIdsToWorkouts(workoutIds), id);
         URI location = URI.create("goals/" + goalResponse.getId());
         return ResponseEntity.created(location).build();
     }

@@ -26,7 +26,7 @@ public class WorkoutMapperImpl extends WorkoutMapper {
     }
 
     @Override
-    public Workout exerciseDtoToExercise(WorkoutDto workoutDto) {
+    public Workout workoutDtoToWorkout(WorkoutDto workoutDto) {
         if (workoutDto == null) {
             return null;
         }

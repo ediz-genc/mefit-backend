@@ -44,4 +44,23 @@ public class ProgramMapperImpl extends ProgramMapper {
         return program;
     }
 
+    @Override
+    public Program patchProgramDtoTProgram(ProgramDto programDto, Integer id) {
+        if (programDto == null) {
+            return null;
+        }
+
+        Program program = new Program();
+
+        program.setId(id);
+        program.setName(programDto.getName());
+        program.setDescription(programDto.getDescription());
+        program.setImgUrl(programDto.getImgUrl());
+        program.setCategory(programDto.getCategory());
+        program.setGoals(mapGoalIdsToGoals(programDto.getGoalId()));
+        program.setWorkouts(mapWorkoutIdsToWorkouts(programDto.getWorkoutId()));
+
+        return program;
+    }
+
 }

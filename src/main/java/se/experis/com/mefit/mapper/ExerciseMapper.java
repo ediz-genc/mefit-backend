@@ -22,7 +22,7 @@ public abstract class ExerciseMapper {
     protected WorkoutService workoutService;
 
     @Mapping(target = "workouts", source = "workouts", qualifiedByName = "workoutIdsToWorkouts")
-    public abstract ExerciseDto exerciseDto(Exercise exercise);
+    public abstract ExerciseDto exerciseToExerciseDto(Exercise exercise);
 
     @Named("workoutIdsToWorkouts")
     public Set<Workout> mapWorkoutIdsToWorkouts(Set<Integer> source) {
@@ -32,5 +32,7 @@ public abstract class ExerciseMapper {
         return source.stream().map(s -> workoutService.findById(s)).collect(Collectors.toSet());
     }
 
-    public abstract Exercise movieDtoToExercise(ExerciseDto exerciseDto);
+    public abstract Exercise exerciseDtoToExercise(ExerciseDto exerciseDto);
+
+    public abstract Exercise patchExerciseDtoToExercise(ExerciseDto exerciseDto, Integer id);
 }

@@ -45,4 +45,23 @@ public class GoalMapperImpl extends GoalMapper {
         return goal;
     }
 
+    @Override
+    public Goal patchGoalDtoToGoal(GoalDto goalDto, Integer id) {
+        if (goalDto == null) {
+            return null;
+        }
+        Goal goal = new Goal();
+
+        goal.setId(id);
+        goal.setName(goalDto.getName());
+        goal.setStartDate(goalDto.getStartDate());
+        goal.setEndDate(goalDto.getEndDate());
+        goal.setCompleted(goalDto.getCompleted());
+        goal.setUser(mapUserIdToUser(goalDto.getUserId()));
+        goal.setPrograms(mapProgramIdsToPrograms(goalDto.getProgramId()));
+        goal.setWorkouts(mapWorkoutIdsToWorkouts(goalDto.getWorkoutId()));
+
+        return goal;
+    }
+
 }

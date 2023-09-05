@@ -70,4 +70,6 @@ public abstract class GoalMapper {
 
     public abstract Goal goalDtoToGoal(GoalDto goalDto);
 
+    public abstract Goal patchGoalDtoToGoal(GoalDto goalDto, Integer id);
+
 }
