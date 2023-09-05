@@ -1,8 +1,11 @@
 package se.experis.com.mefit.mapper;
 
+import org.springframework.stereotype.Component;
+
 import se.experis.com.mefit.model.Exercise;
 import se.experis.com.mefit.model.DTOs.ExerciseDto;
 
+@Component
 public class ExerciseMapperImpl extends ExerciseMapper {
 
     @Override
