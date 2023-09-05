@@ -2,9 +2,12 @@ package se.experis.com.mefit.mapper;
 
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.DTOs.GoalDto;
 
+@Component
 public class GoalMapperImpl extends GoalMapper {
 
     @Override
