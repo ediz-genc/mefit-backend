@@ -1,9 +1,9 @@
 package se.experis.com.mefit.model;
 
 import java.util.Set;
-import java.util.stream.Collectors;
+// import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
+// import com.fasterxml.jackson.annotation.JsonGetter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,13 +35,13 @@ public class Exercise {
     private String description;
 
     @Column(name = "muscle_group", length = 50)
-    public String muscleGroup;
+    private String muscleGroup;
 
     @Column(name = "exercise_img_url")
-    public String imgUrl;
+    private String imgUrl;
 
     @Column(name = "exercise_vid_url")
-    public String vidUrl;
+    private String vidUrl;
 
     @Column(name = "fitness_lvl")
     @Enumerated(EnumType.STRING)
@@ -50,16 +50,16 @@ public class Exercise {
     @ManyToMany
     private Set<Workout> workouts;
 
-    public Set<Workout> getWorkouts() {
-        return workouts;
-    }
+    // public Set<Workout> getWorkouts() {
+    // return workouts;
+    // }
 
-    @JsonGetter("workouts")
-    public Set<String> jsonGetWorkouts() {
-        if (workouts != null) {
-            return workouts.stream().map(s -> s.getName()).collect(Collectors.toSet());
-        }
-        return null;
-    }
+    // @JsonGetter("workouts")
+    // public Set<String> jsonGetWorkouts() {
+    // if (workouts != null) {
+    // return workouts.stream().map(s -> s.getName()).collect(Collectors.toSet());
+    // }
+    // return null;
+    // }
 
 }
