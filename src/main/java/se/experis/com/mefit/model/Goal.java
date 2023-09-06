@@ -51,6 +51,9 @@ public class Goal {
     @ManyToMany(mappedBy = "goals")
     private Set<Workout> workouts;
 
+    @ManyToMany(mappedBy = "completedInGoal")
+    private Set<Workout> completedWorkouts;
+
     public Set<Program> getPrograms() {
         return programs;
     }

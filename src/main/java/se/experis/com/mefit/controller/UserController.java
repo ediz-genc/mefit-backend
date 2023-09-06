@@ -93,7 +93,7 @@ public class UserController {
     }
 
     @Operation(summary = "Get goal-history from a user")
-    @GetMapping("{id}/goalHistory")
+    @GetMapping("{id}/history")
     public ResponseEntity<Set<GoalDto>> getGoalHistory(@PathVariable int id) {
         User user = userService.findById(id);
         Set<Goal> userGoals = user.getGoalHistory();

@@ -1,6 +1,7 @@
 package se.experis.com.mefit.controller;
 
 import java.net.URI;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,9 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import se.experis.com.mefit.mapper.GoalMapper;
+import se.experis.com.mefit.mapper.WorkoutMapper;
 import se.experis.com.mefit.model.Goal;
+import se.experis.com.mefit.model.Workout;
 import se.experis.com.mefit.model.DTOs.GoalDto;
 import se.experis.com.mefit.model.DTOs.PutGoalDto;
+import se.experis.com.mefit.model.DTOs.WorkoutDto;
 import se.experis.com.mefit.service.GoalService;
 
 @Tag(name = "Goals", description = "Crud and more for managing goals")
@@ -30,11 +34,13 @@ import se.experis.com.mefit.service.GoalService;
 public class GoalController {
     private final GoalService goalService;
     private final GoalMapper goalMapper;
+    private final WorkoutMapper workoutMapper;
 
     @Autowired
-    public GoalController(GoalService goalService, GoalMapper goalMapper) {
+    public GoalController(GoalService goalService, GoalMapper goalMapper, WorkoutMapper workoutMapper) {
         this.goalService = goalService;
         this.goalMapper = goalMapper;
+        this.workoutMapper = workoutMapper;
     }
 
     @Operation(summary = "Get all goals")
@@ -96,4 +102,33 @@ public class GoalController {
         return ResponseEntity.created(location).build();
     }
 
+    @Operation(summary = "Get all workouts in a goal")
+    @GetMapping("{id}/workouts/completed")
+    public ResponseEntity<Set<WorkoutDto>> getCompletedWorkouts(@PathVariable int id) {
+        Set<Workout> completedWorkouts = goalService.getCompletedWorkouts(id);
+        Set<WorkoutDto> completedWorkoutsDtos = completedWorkouts.stream()
+                .map(s -> workoutMapper.workoutToWorkoutDto(s)).collect(Collectors.toSet());
+        return ResponseEntity.ok(completedWorkoutsDtos);
+    }
+
+    @GetMapping("{id}/workouts/pending")
+    public ResponseEntity<Set<WorkoutDto>> getPendingWorkouts(@PathVariable int id) {
+        Set<Workout> pendingWorkouts = goalService.getCompletedWorkouts(id);
+        Set<WorkoutDto> pendingWorkoutDtos = pendingWorkouts.stream().map(s -> workoutMapper.workoutToWorkoutDto(s))
+                .collect(Collectors.toSet());
+        return ResponseEntity.ok(pendingWorkoutDtos);
+    }
+
+    @GetMapping("{id}/workouts")
+    public ResponseEntity<Set<WorkoutDto>> getAllWorkouts(@PathVariable int id) {
+        Set<Workout> pending = goalService.getCompletedWorkouts(id);
+        Set<Workout> completed = goalService.getWorkouts(id);
+        Set<Workout> all = new HashSet<>();
+
+        all.addAll(pending);
+        all.addAll(completed);
+
+        Set<WorkoutDto> dtos = all.stream().map(s -> workoutMapper.workoutToWorkoutDto(s)).collect(Collectors.toSet());
+        return ResponseEntity.ok(dtos);
+    }
 }
