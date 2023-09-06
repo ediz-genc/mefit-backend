@@ -111,6 +111,7 @@ public class GoalController {
         return ResponseEntity.ok(completedWorkoutsDtos);
     }
 
+    @Operation(summary = "Get all pending workouts in a goal with given id")
     @GetMapping("{id}/workouts/pending")
     public ResponseEntity<Set<WorkoutDto>> getPendingWorkouts(@PathVariable int id) {
         Set<Workout> pendingWorkouts = goalService.getCompletedWorkouts(id);
@@ -119,6 +120,7 @@ public class GoalController {
         return ResponseEntity.ok(pendingWorkoutDtos);
     }
 
+    @Operation(summary = "Get all completed goals in a goal with a given id")
     @GetMapping("{id}/workouts")
     public ResponseEntity<Set<WorkoutDto>> getAllWorkouts(@PathVariable int id) {
         Set<Workout> pending = goalService.getCompletedWorkouts(id);
