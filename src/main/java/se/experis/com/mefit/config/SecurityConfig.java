@@ -26,8 +26,9 @@ public class SecurityConfig {
         @Bean
         CorsConfigurationSource corsConfigurationSource() {
                 CorsConfiguration configuration = new CorsConfiguration();
-                configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-                configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+                configuration.setAllowCredentials(false);
+                configuration.setAllowedOrigins(Arrays.asList("*"));
+                configuration.setAllowedMethods(Arrays.asList("*"));
                 configuration.setAllowedHeaders(Arrays.asList("*"));
                 UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
                 source.registerCorsConfiguration("/**", configuration);
@@ -50,9 +51,7 @@ public class SecurityConfig {
                  * enable CSRF.
                  */
                 http
-                                
-                                
-                                .csrf(csrf -> csrf.disable());
+                                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
                 /*
                  * Set stateless session creation policy, suitable for RESTful APIs.

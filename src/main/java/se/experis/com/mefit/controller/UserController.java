@@ -46,16 +46,12 @@ public class UserController {
         this.goalMapper = goalMapper;
     }
 
-    @CrossOrigin(origins = "*")
     @Operation(summary = "Get all users")
     @GetMapping
-
     public ResponseEntity<Set<UserDto>> getAll() {
         Set<UserDto> usersDtos = userService.findAll().stream().map(s -> userMapper.userToUserDto(s))
-                .collect(Collectors.toSet());
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("Access-Control-Allow-Origin", "*");
-        return new ResponseEntity<Set<UserDto>>(usersDtos, responseHeaders, HttpStatus.OK);
+                 .collect(Collectors.toSet());
+        return new ResponseEntity<Set<UserDto>>(usersDtos, HttpStatus.OK);
     }
 
     @Operation(summary = "Get a user with given id")
