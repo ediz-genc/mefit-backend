@@ -1,9 +1,9 @@
 package se.experis.com.mefit.model;
 
 import java.util.Set;
-import java.util.stream.Collectors;
+// import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
+// import com.fasterxml.jackson.annotation.JsonGetter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,28 +48,29 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Goal> goalHistory;
 
-    public Set<Goal> getGoalHistory() {
-        return goalHistory;
-    }
+    // public Set<Goal> getGoalHistory() {
+    // return goalHistory;
+    // }
 
-    @JsonGetter("goalHistory")
-    public Set<String> jsonGetGoalHistory() {
-        if (goalHistory != null) {
-            return goalHistory.stream().map(s -> s.getName()).collect(Collectors.toSet());
-        }
-        return null;
-    }
+    // @JsonGetter("goalHistory")
+    // public Set<String> jsonGetGoalHistory() {
+    // if (goalHistory != null) {
+    // return goalHistory.stream().map(s ->
+    // s.getName()).collect(Collectors.toSet());
+    // }
+    // return null;
+    // }
 
-    public Goal getGoal() {
-        return currentGoal;
-    }
+    // public Goal getGoal() {
+    // return currentGoal;
+    // }
 
-    @JsonGetter("currentGoal")
-    public String jsonGetCurrentGoal() {
-        if (currentGoal != null) {
-            return currentGoal.getName();
-        }
-        return null;
-    }
+    // @JsonGetter("currentGoal")
+    // public String jsonGetCurrentGoal() {
+    // if (currentGoal != null) {
+    // return currentGoal.getName();
+    // }
+    // return null;
+    // }
 
 }
