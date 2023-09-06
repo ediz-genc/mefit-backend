@@ -45,7 +45,7 @@ public class ProgramServiceImpl implements ProgramService {
     }
 
     @Override
-    public Program addWorkOut(Set<Workout> workouts, Integer id) {
+    public Program addWorkout(Set<Workout> workouts, Integer id) {
         Program program = programRepository.findById(id).get();
 
         Set<Workout> workoutList = program.getWorkouts();

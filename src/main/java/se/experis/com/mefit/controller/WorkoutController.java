@@ -2,6 +2,7 @@ package se.experis.com.mefit.controller;
 
 import java.net.URI;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import se.experis.com.mefit.model.Exercise;
+import se.experis.com.mefit.mapper.WorkoutMapper;
 import se.experis.com.mefit.model.Workout;
+import se.experis.com.mefit.model.DTOs.PutWorkoutDto;
+import se.experis.com.mefit.model.DTOs.WorkoutDto;
 import se.experis.com.mefit.service.WorkoutService;
 
 @Tag(name = "Workout", description = "Crud and more mor workout")
@@ -26,54 +29,62 @@ import se.experis.com.mefit.service.WorkoutService;
 @RequestMapping("api/v1/workouts")
 public class WorkoutController {
     private final WorkoutService workoutService;
+    private final WorkoutMapper workoutMapper;
 
     @Autowired
-    public WorkoutController(WorkoutService workoutService) {
+    public WorkoutController(WorkoutService workoutService, WorkoutMapper workoutMapper) {
         this.workoutService = workoutService;
+        this.workoutMapper = workoutMapper;
     }
 
     @Operation(summary = "Get all workouts")
     @GetMapping
-    public ResponseEntity<Set<Workout>> getAll() {
-        Set<Workout> workouts = workoutService.findAll();
-        return ResponseEntity.ok(workouts);
+    public ResponseEntity<Set<WorkoutDto>> getAll() {
+        Set<WorkoutDto> workoutDtos = workoutService.findAll().stream().map(s -> workoutMapper.workoutToWorkoutDto(s))
+                .collect(Collectors.toSet());
+        return ResponseEntity.ok(workoutDtos);
     }
 
     @Operation(summary = "Get a workout with a given id")
     @GetMapping("{id}")
-    public ResponseEntity<Workout> getById(@PathVariable int id) {
-        Workout workout = workoutService.findById(id);
-        return ResponseEntity.ok(workout);
+    public ResponseEntity<WorkoutDto> getById(@PathVariable int id) {
+        WorkoutDto workoutDto = workoutMapper.workoutToWorkoutDto(workoutService.findById(id));
+        return ResponseEntity.ok(workoutDto);
     }
 
     @Operation(summary = "Add a new workout")
     @PostMapping
-    public ResponseEntity<Workout> addWorkout(@RequestBody Workout workout) {
-        Workout newWorkout = workoutService.add(workout);
+    public ResponseEntity<Workout> addWorkout(@RequestBody WorkoutDto workoutDto) {
+        Workout newWorkout = workoutService.add(workoutMapper.workoutDtoToWorkout(workoutDto));
         URI location = URI.create("workout/" + newWorkout.getId());
         return ResponseEntity.created(location).build();
     }
 
     @Operation(summary = "Update existing workout by given id")
     @PutMapping("{id}")
-    public ResponseEntity<Workout> updateWorkout(@PathVariable int id, @RequestBody Workout workout) {
-        Workout updatedWorkout = workoutService.update(id, workout);
-        workoutService.add(updatedWorkout);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> updateWorkout(@PathVariable int id, PutWorkoutDto putWorkoutDto) {
+        Workout oldWorkout = workoutService.findById(id);
+        Workout updatedWorkout = workoutMapper.putWorkoutDtoToWorkout(id, putWorkoutDto);
+        updatedWorkout.setExercises(oldWorkout.getExercises());
+        updatedWorkout.setPrograms(oldWorkout.getPrograms());
+        updatedWorkout.setGoals(oldWorkout.getGoals());
+        Workout updatedWorkoutResponse = workoutService.add(updatedWorkout);
+        URI location = URI.create("workouts/" + updatedWorkoutResponse.getId());
+        return ResponseEntity.created(location).build();
     }
 
     @Operation(summary = "Delete a workout with given id")
     @DeleteMapping("{id}")
-    public ResponseEntity<Workout> deleteWorkout(@PathVariable int id) {
+    public ResponseEntity<Void> deleteWorkout(@PathVariable int id) {
         workoutService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "Add exercises to a workout")
+    @Operation(summary = "Add exercises to a workout with given id")
     @PatchMapping("{id}")
-    public ResponseEntity<Workout> addExercises(@PathVariable int id,
-            @RequestBody Set<Exercise> exercises) {
-        Workout workoutResponse = workoutService.addExercise(id, exercises);
+    public ResponseEntity<Void> addExercises(@PathVariable int id,
+            @RequestBody Set<Integer> exercises) {
+        Workout workoutResponse = workoutService.addExercise(id, workoutMapper.mapExerciseIdsToExercise(exercises));
         URI location = URI.create("workouts/" + workoutResponse.getId());
         return ResponseEntity.created(location).build();
     }

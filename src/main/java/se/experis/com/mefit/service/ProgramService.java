@@ -6,5 +6,5 @@ import se.experis.com.mefit.model.Program;
 import se.experis.com.mefit.model.Workout;
 
 public interface ProgramService extends CrudService<Program, Integer> {
-    Program addWorkOut(Set<Workout> workouts, Integer id);
+    Program addWorkout(Set<Workout> workouts, Integer id);
 }

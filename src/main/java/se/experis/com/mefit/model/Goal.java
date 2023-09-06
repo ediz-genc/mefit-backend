@@ -2,9 +2,9 @@ package se.experis.com.mefit.model;
 
 import java.time.LocalDate;
 import java.util.Set;
-import java.util.stream.Collectors;
+// import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
+// import com.fasterxml.jackson.annotation.JsonGetter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -55,35 +55,35 @@ public class Goal {
         return programs;
     }
 
-    @JsonGetter("programs")
-    public Set<String> jsonGetPrograms() {
-        if (programs != null) {
-            return programs.stream().map(s -> s.getName()).collect(Collectors.toSet());
-        }
-        return null;
-    }
+    // @JsonGetter("programs")
+    // public Set<String> jsonGetPrograms() {
+    // if (programs != null) {
+    // return programs.stream().map(s -> s.getName()).collect(Collectors.toSet());
+    // }
+    // return null;
+    // }
 
-    public Set<Workout> getWorkouts() {
-        return workouts;
-    }
+    // public Set<Workout> getWorkouts() {
+    // return workouts;
+    // }
 
-    @JsonGetter("workouts")
-    public Set<String> jsonGetWorkouts() {
-        if (workouts != null) {
-            return workouts.stream().map(s -> s.getName()).collect(Collectors.toSet());
-        }
-        return null;
-    }
+    // @JsonGetter("workouts")
+    // public Set<String> jsonGetWorkouts() {
+    // if (workouts != null) {
+    // return workouts.stream().map(s -> s.getName()).collect(Collectors.toSet());
+    // }
+    // return null;
+    // }
 
-    public User getUser() {
-        return user;
-    }
+    // public User getUser() {
+    // return user;
+    // }
 
-    @JsonGetter("user")
-    public String jsonGetUser() {
-        if (user != null) {
-            return user.getUsername();
-        }
-        return null;
-    }
+    // @JsonGetter("user")
+    // public String jsonGetUser() {
+    // if (user != null) {
+    // return user.getUsername();
+    // }
+    // return null;
+    // }
 }
