@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import se.experis.com.mefit.mapper.GoalMapper;
 import se.experis.com.mefit.mapper.UserMapper;
+import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.User;
 import se.experis.com.mefit.model.DTOs.GoalDto;
 import se.experis.com.mefit.model.DTOs.PutUserDto;
@@ -89,6 +90,15 @@ public class UserController {
         User userResponse = userService.addGoal(goalMapper.goalDtoToGoal(goalDto), id);
         URI location = URI.create("goals/" + userResponse.getId());
         return ResponseEntity.created(location).build();
+    }
+
+    @Operation(summary = "Get goal-history from a user")
+    @GetMapping("{id}/goalHistory")
+    public ResponseEntity<Set<GoalDto>> getGoalHistory(@PathVariable int id) {
+        User user = userService.findById(id);
+        Set<Goal> userGoals = user.getGoalHistory();
+        Set<GoalDto> goalDtos = userGoals.stream().map(s -> goalMapper.goalToGoalDto(s)).collect(Collectors.toSet());
+        return ResponseEntity.ok(goalDtos);
     }
 
 }
