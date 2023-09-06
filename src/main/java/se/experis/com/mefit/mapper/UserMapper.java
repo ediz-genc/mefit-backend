@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.User;
+import se.experis.com.mefit.model.DTOs.PutUserDto;
 import se.experis.com.mefit.model.DTOs.UserDto;
 import se.experis.com.mefit.service.GoalService;
 
@@ -40,4 +41,5 @@ public abstract class UserMapper {
 
     public abstract User userDtoToUser(UserDto userDto);
 
+    public abstract User putUserDtoToUser(Integer id, PutUserDto putUserDto);
 }

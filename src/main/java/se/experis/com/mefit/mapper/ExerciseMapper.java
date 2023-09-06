@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import se.experis.com.mefit.model.Exercise;
 import se.experis.com.mefit.model.Workout;
 import se.experis.com.mefit.model.DTOs.ExerciseDto;
+import se.experis.com.mefit.model.DTOs.PutExerciseDto;
 import se.experis.com.mefit.service.ExerciseService;
 import se.experis.com.mefit.service.WorkoutService;
 
@@ -34,5 +35,6 @@ public abstract class ExerciseMapper {
 
     public abstract Exercise exerciseDtoToExercise(ExerciseDto exerciseDto);
 
-    public abstract Exercise patchExerciseDtoToExercise(ExerciseDto exerciseDto, Integer id);
+    public abstract Exercise putExerciseDtoToExercise(PutExerciseDto exerciseDto, Integer id);
+
 }

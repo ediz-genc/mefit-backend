@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import se.experis.com.mefit.model.Program;
 import se.experis.com.mefit.model.DTOs.ProgramDto;
+import se.experis.com.mefit.model.DTOs.PutProgramDto;
 
 @Component
 public class ProgramMapperImpl extends ProgramMapper {
@@ -48,20 +49,18 @@ public class ProgramMapperImpl extends ProgramMapper {
     }
 
     @Override
-    public Program patchProgramDtoTProgram(ProgramDto programDto, Integer id) {
-        if (programDto == null) {
+    public Program putProgramDtoTProgram(PutProgramDto putProgramDto, Integer id) {
+        if (putProgramDto == null) {
             return null;
         }
 
         Program program = new Program();
 
         program.setId(id);
-        program.setName(programDto.getName());
-        program.setDescription(programDto.getDescription());
-        program.setImgUrl(programDto.getImgUrl());
-        program.setCategory(programDto.getCategory());
-        program.setGoals(mapGoalIdsToGoals(programDto.getGoalId()));
-        program.setWorkouts(mapWorkoutIdsToWorkouts(programDto.getWorkoutId()));
+        program.setName(putProgramDto.getName());
+        program.setDescription(putProgramDto.getDescription());
+        program.setImgUrl(putProgramDto.getImgUrl());
+        program.setCategory(putProgramDto.getCategory());
 
         return program;
     }

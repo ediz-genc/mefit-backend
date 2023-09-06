@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import se.experis.com.mefit.mapper.ProgramMapper;
 import se.experis.com.mefit.model.Program;
 import se.experis.com.mefit.model.DTOs.ProgramDto;
+import se.experis.com.mefit.model.DTOs.PutProgramDto;
 import se.experis.com.mefit.service.ProgramService;
 
 @Tag(name = "Programs", description = "Crude and more for programs")
@@ -61,15 +62,19 @@ public class ProgramController {
 
     @Operation(summary = "Update existing program with given id")
     @PutMapping("{id}")
-    public ResponseEntity<Program> updateProgram(@PathVariable int id, @RequestBody ProgramDto programDto) {
-        Program updatedProgram = programMapper.patchProgramDtoTProgram(programDto, id);
-        programService.add(updatedProgram);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> updateProgram(@PathVariable int id, PutProgramDto putProgramDto) {
+        Program oldProgram = programService.findById(id);
+        Program updatedProgram = programMapper.putProgramDtoTProgram(putProgramDto, id);
+        updatedProgram.setGoals(oldProgram.getGoals());
+        updatedProgram.setWorkouts(oldProgram.getWorkouts());
+        Program updatedProgramResponse = programService.add(updatedProgram);
+        URI location = URI.create("programs/" + updatedProgramResponse.getId());
+        return ResponseEntity.created(location).build();
     }
 
     @Operation(summary = "Delete program with given id")
     @DeleteMapping("{id}")
-    public ResponseEntity<Program> deleteProgram(@PathVariable int id) {
+    public ResponseEntity<Void> deleteProgram(@PathVariable int id) {
         programService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

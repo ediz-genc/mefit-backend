@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import se.experis.com.mefit.mapper.WorkoutMapper;
 import se.experis.com.mefit.model.Workout;
+import se.experis.com.mefit.model.DTOs.PutWorkoutDto;
 import se.experis.com.mefit.model.DTOs.WorkoutDto;
 import se.experis.com.mefit.service.WorkoutService;
 
@@ -61,11 +62,15 @@ public class WorkoutController {
 
     @Operation(summary = "Update existing workout by given id")
     @PutMapping("{id}")
-    public ResponseEntity<Void> updateWorkout(@PathVariable int id, @RequestBody WorkoutDto workoutDto) {
-        Workout updatedWorkout = workoutService.update(id, workoutMapper.workoutDtoToWorkout(workoutDto));
-        updatedWorkout.setId(workoutDto.getId());
-        workoutService.add(updatedWorkout);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> updateWorkout(@PathVariable int id, PutWorkoutDto putWorkoutDto) {
+        Workout oldWorkout = workoutService.findById(id);
+        Workout updatedWorkout = workoutMapper.putWorkoutDtoToWorkout(id, putWorkoutDto);
+        updatedWorkout.setExercises(oldWorkout.getExercises());
+        updatedWorkout.setPrograms(oldWorkout.getPrograms());
+        updatedWorkout.setGoals(oldWorkout.getGoals());
+        Workout updatedWorkoutResponse = workoutService.add(updatedWorkout);
+        URI location = URI.create("workouts/" + updatedWorkoutResponse.getId());
+        return ResponseEntity.created(location).build();
     }
 
     @Operation(summary = "Delete a workout with given id")

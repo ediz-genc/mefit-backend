@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import se.experis.com.mefit.model.Workout;
+import se.experis.com.mefit.model.DTOs.PutWorkoutDto;
 import se.experis.com.mefit.model.DTOs.WorkoutDto;
 
 @Component
@@ -42,6 +43,21 @@ public class WorkoutMapperImpl extends WorkoutMapper {
         workout.setExercises(mapExerciseIdsToExercise(workoutDto.getExerciseId()));
         workout.setPrograms(mapProgramIdsToPrograms(workoutDto.getProgramId()));
         workout.setGoals(mapGoalIdsToGoals(workoutDto.getGoalId()));
+
+        return workout;
+    }
+
+    @Override
+    public Workout putWorkoutDtoToWorkout(Integer id, PutWorkoutDto putWorkoutDto) {
+        if (putWorkoutDto == null) {
+            return null;
+        }
+
+        Workout workout = new Workout();
+
+        workout.setId(id);
+        workout.setName(putWorkoutDto.getName());
+        workout.setDescription(putWorkoutDto.getDescription());
 
         return workout;
     }

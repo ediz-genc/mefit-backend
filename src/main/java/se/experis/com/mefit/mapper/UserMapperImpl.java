@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import se.experis.com.mefit.model.User;
+import se.experis.com.mefit.model.DTOs.PutUserDto;
 import se.experis.com.mefit.model.DTOs.UserDto;
 
 @Component
@@ -44,6 +45,23 @@ public class UserMapperImpl extends UserMapper {
         user.setWeight(userDto.getWeight());
         user.setCurrentGoal(mapGoalIdToGoal(userDto.getCurrentGoalId()));
         user.setGoalHistory(mapGoalIdsToGoals(userDto.getGoalHistoryId()));
+
+        return user;
+    }
+
+    @Override
+    public User putUserDtoToUser(Integer id, PutUserDto patchUserDto) {
+        if (patchUserDto == null) {
+            return null;
+        }
+        User user = new User();
+
+        user.setId(id);
+        user.setBio(patchUserDto.getBio());
+        user.setUsername(patchUserDto.getUsername());
+        user.setProfilePicUrl(patchUserDto.getProfilePicUrl());
+        user.setLength(patchUserDto.getLength());
+        user.setWeight(patchUserDto.getWeight());
 
         return user;
     }

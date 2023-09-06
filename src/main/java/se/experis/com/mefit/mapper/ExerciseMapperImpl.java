@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import se.experis.com.mefit.model.Exercise;
 import se.experis.com.mefit.model.DTOs.ExerciseDto;
+import se.experis.com.mefit.model.DTOs.PutExerciseDto;
 
 @Component
 public class ExerciseMapperImpl extends ExerciseMapper {
@@ -45,19 +46,18 @@ public class ExerciseMapperImpl extends ExerciseMapper {
     }
 
     @Override
-    public Exercise patchExerciseDtoToExercise(ExerciseDto exerciseDto, Integer id) {
-        if (exerciseDto == null) {
+    public Exercise putExerciseDtoToExercise(PutExerciseDto putExerciseDto, Integer id) {
+        if (putExerciseDto == null) {
             return null;
         }
         Exercise exercise = new Exercise();
 
-        exercise.setId(id);
-        exercise.setName(exerciseDto.getName());
-        exercise.setDescription(exerciseDto.getDescription());
-        exercise.setMuscleGroup(exerciseDto.getMuscleGroup());
-        exercise.setImgUrl(exerciseDto.getImgUrl());
-        exercise.setVidUrl(exerciseDto.getVidUrl());
-        exercise.setFitnessLevel(exerciseDto.getFitnessLevel());
+        exercise.setName(putExerciseDto.getName());
+        exercise.setDescription(putExerciseDto.getDescription());
+        exercise.setMuscleGroup(putExerciseDto.getMuscleGroup());
+        exercise.setImgUrl(putExerciseDto.getImgUrl());
+        exercise.setVidUrl(putExerciseDto.getVidUrl());
+        exercise.setFitnessLevel(putExerciseDto.getFitnessLevel());
 
         return exercise;
     }

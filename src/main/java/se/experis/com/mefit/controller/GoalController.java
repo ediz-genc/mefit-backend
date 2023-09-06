@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import se.experis.com.mefit.mapper.GoalMapper;
 import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.DTOs.GoalDto;
+import se.experis.com.mefit.model.DTOs.PutGoalDto;
 import se.experis.com.mefit.service.GoalService;
 
 @Tag(name = "Goals", description = "Crud and more for managing goals")
@@ -61,15 +62,20 @@ public class GoalController {
 
     @Operation(summary = "Update existing goal by given id")
     @PutMapping("{id}")
-    public ResponseEntity<Void> updateGoal(@PathVariable int id, @RequestBody GoalDto goalDto) {
-        Goal updatedGoal = goalMapper.patchGoalDtoToGoal(goalDto, id);
-        goalService.add(updatedGoal);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> updateGoal(@PathVariable int id, PutGoalDto putGoalDto) {
+        Goal oldGoal = goalService.findById(id);
+        Goal updatedGoal = goalMapper.putGoalDtoToGoal(putGoalDto, id);
+        updatedGoal.setPrograms(oldGoal.getPrograms());
+        updatedGoal.setUser(oldGoal.getUser());
+        updatedGoal.setWorkouts(oldGoal.getWorkouts());
+        Goal updatedGoalResponse = goalService.add(updatedGoal);
+        URI location = URI.create("goals/" + updatedGoalResponse.getId());
+        return ResponseEntity.created(location).build();
     }
 
     @Operation(summary = "Delete a goal with given id")
     @DeleteMapping("{id}")
-    public ResponseEntity<Goal> deleteGoal(@PathVariable int id) {
+    public ResponseEntity<Void> deleteGoal(@PathVariable int id) {
         goalService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

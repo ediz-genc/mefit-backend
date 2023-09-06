@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.DTOs.GoalDto;
+import se.experis.com.mefit.model.DTOs.PutGoalDto;
 
 @Component
 public class GoalMapperImpl extends GoalMapper {
@@ -49,20 +50,17 @@ public class GoalMapperImpl extends GoalMapper {
     }
 
     @Override
-    public Goal patchGoalDtoToGoal(GoalDto goalDto, Integer id) {
-        if (goalDto == null) {
+    public Goal putGoalDtoToGoal(PutGoalDto putGoalDto, Integer id) {
+        if (putGoalDto == null) {
             return null;
         }
         Goal goal = new Goal();
 
         goal.setId(id);
-        goal.setName(goalDto.getName());
-        goal.setStartDate(goalDto.getStartDate());
-        goal.setEndDate(goalDto.getEndDate());
-        goal.setCompleted(goalDto.getCompleted());
-        goal.setUser(mapUserIdToUser(goalDto.getUserId()));
-        goal.setPrograms(mapProgramIdsToPrograms(goalDto.getProgramId()));
-        goal.setWorkouts(mapWorkoutIdsToWorkouts(goalDto.getWorkoutId()));
+        goal.setName(putGoalDto.getName());
+        goal.setStartDate(putGoalDto.getStartDate());
+        goal.setEndDate(putGoalDto.getEndDate());
+        goal.setCompleted(putGoalDto.getCompleted());
 
         return goal;
     }

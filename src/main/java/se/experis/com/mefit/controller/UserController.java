@@ -22,6 +22,7 @@ import se.experis.com.mefit.mapper.GoalMapper;
 import se.experis.com.mefit.mapper.UserMapper;
 import se.experis.com.mefit.model.User;
 import se.experis.com.mefit.model.DTOs.GoalDto;
+import se.experis.com.mefit.model.DTOs.PutUserDto;
 import se.experis.com.mefit.model.DTOs.UserDto;
 import se.experis.com.mefit.service.UserService;
 
@@ -65,16 +66,19 @@ public class UserController {
 
     @Operation(summary = "Update an existing user with given id")
     @PutMapping("{id}")
-    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody UserDto userDto) {
-        User updatedUser = userService.update(id, userMapper.userDtoToUser(userDto));
-        updatedUser.setId(userDto.getId());// Don't know if this works
-        userService.add(updatedUser);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> updateUser(@PathVariable int id, PutUserDto putUserDto) {
+        User oldUser = userService.findById(id);
+        User updatedUser = userMapper.putUserDtoToUser(id, putUserDto);
+        updatedUser.setCurrentGoal(oldUser.getCurrentGoal());
+        updatedUser.setGoalHistory(oldUser.getGoalHistory());
+        User updatedUserResponse = userService.add(updatedUser);
+        URI location = URI.create("users/" + updatedUserResponse.getId());
+        return ResponseEntity.created(location).build();
     }
 
     @Operation(summary = "Delete existing user with given id")
     @DeleteMapping("{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable int id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
         userService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

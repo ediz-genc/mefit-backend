@@ -12,6 +12,7 @@ import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.Program;
 import se.experis.com.mefit.model.Workout;
 import se.experis.com.mefit.model.DTOs.ProgramDto;
+import se.experis.com.mefit.model.DTOs.PutProgramDto;
 import se.experis.com.mefit.service.GoalService;
 import se.experis.com.mefit.service.ProgramService;
 import se.experis.com.mefit.service.WorkoutService;
@@ -50,6 +51,6 @@ public abstract class ProgramMapper {
 
     public abstract Program programDtoToProgram(ProgramDto programDto);
 
-    public abstract Program patchProgramDtoTProgram(ProgramDto programDto, Integer id);
+    public abstract Program putProgramDtoTProgram(PutProgramDto putProgramDto, Integer id);
 
 }

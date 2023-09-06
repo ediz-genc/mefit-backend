@@ -13,6 +13,7 @@ import se.experis.com.mefit.model.Program;
 import se.experis.com.mefit.model.User;
 import se.experis.com.mefit.model.Workout;
 import se.experis.com.mefit.model.DTOs.GoalDto;
+import se.experis.com.mefit.model.DTOs.PutGoalDto;
 import se.experis.com.mefit.service.GoalService;
 import se.experis.com.mefit.service.ProgramService;
 import se.experis.com.mefit.service.UserService;
@@ -70,6 +71,6 @@ public abstract class GoalMapper {
 
     public abstract Goal goalDtoToGoal(GoalDto goalDto);
 
-    public abstract Goal patchGoalDtoToGoal(GoalDto goalDto, Integer id);
+    public abstract Goal putGoalDtoToGoal(PutGoalDto putGoalDto, Integer id);
 
 }

@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import se.experis.com.mefit.mapper.ExerciseMapper;
 import se.experis.com.mefit.model.Exercise;
 import se.experis.com.mefit.model.DTOs.ExerciseDto;
+import se.experis.com.mefit.model.DTOs.PutExerciseDto;
 import se.experis.com.mefit.service.ExerciseService;
 
 @Tag(name = "Exercise", description = "Crud and more for exercises")
@@ -60,15 +61,19 @@ public class ExerciseController {
 
     @Operation(summary = "Update an exercise with given id")
     @PutMapping("{id}")
-    public ResponseEntity<Void> updateExercise(@PathVariable int id, @RequestBody ExerciseDto exerciseDto) {
-        Exercise updatedExercise = exerciseMapper.patchExerciseDtoToExercise(exerciseDto, id);
+    public ResponseEntity<Void> updateExercise(@PathVariable int id, PutExerciseDto putExerciseDto) {
+        Exercise oldExercise = exerciseService.findById(id);
+        Exercise updatedExercise = exerciseMapper.putExerciseDtoToExercise(putExerciseDto, id);
+        updatedExercise.setId(id);
+        updatedExercise.setWorkouts(oldExercise.getWorkouts());
         exerciseService.add(updatedExercise);
-        return ResponseEntity.noContent().build();
+        URI location = URI.create("exercises/" + updatedExercise.getId());
+        return ResponseEntity.created(location).build();
     }
 
     @Operation(summary = "Delete an exercise with a given id")
     @DeleteMapping("{id}")
-    public ResponseEntity<Exercise> deleteExercise(@PathVariable int id) {
+    public ResponseEntity<Void> deleteExercise(@PathVariable int id) {
         exerciseService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
