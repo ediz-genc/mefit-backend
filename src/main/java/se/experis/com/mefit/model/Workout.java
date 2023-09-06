@@ -41,6 +41,9 @@ public class Workout {
     @ManyToMany
     private Set<Goal> goals;
 
+    @ManyToMany
+    private Set<Goal> completedInGoal;
+
     // public Set<Goal> getGoals() {
     // return goals;
     // }

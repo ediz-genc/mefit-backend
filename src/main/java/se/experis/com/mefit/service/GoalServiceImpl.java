@@ -73,4 +73,20 @@ public class GoalServiceImpl implements GoalService {
         return goal;
     }
 
+    @Override
+    public Set<Workout> getCompletedWorkouts(Integer id) {
+        Goal goal = goalRepository.findById(id).get();
+
+        Set<Workout> completedWorkouts = goal.getCompletedWorkouts();
+        return completedWorkouts;
+    }
+
+    @Override
+    public Set<Workout> getWorkouts(Integer id) {
+        Goal goal = goalRepository.findById(id).get();
+
+        Set<Workout> workouts = goal.getWorkouts();
+        return workouts;
+    }
+
 }
