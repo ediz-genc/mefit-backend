@@ -2,6 +2,9 @@ package se.experis.com.mefit.config;
 
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -9,6 +12,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
 @Configuration
@@ -16,6 +22,17 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
         private final JwtAuthConverter jwtAuthConverter;
+
+        @Bean
+        CorsConfigurationSource corsConfigurationSource() {
+                CorsConfiguration configuration = new CorsConfiguration();
+                configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+                configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+                configuration.setAllowedHeaders(Arrays.asList("*"));
+                UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+                source.registerCorsConfiguration("/**", configuration);
+                return source;
+        }
 
         /*
          * @Bean marks the method as a Spring bean that will be managed by the Spring
@@ -33,7 +50,8 @@ public class SecurityConfig {
                  * enable CSRF.
                  */
                 http
-                                .cors(cors -> cors.disable())
+                                
+                                
                                 .csrf(csrf -> csrf.disable());
 
                 /*
@@ -57,8 +75,9 @@ public class SecurityConfig {
                                                 // .requestMatchers("/api/v1/exercises").permitAll()
                                                 // Require authentication for any other request (maps to
                                                 // /api/v1/resources/restricted).
-                                                .requestMatchers(HttpMethod.POST, "/exercise").hasRole("Contributor")
-                                                .requestMatchers(HttpMethod.POST, "/program").hasRole("Contributor")
+                                                .requestMatchers(HttpMethod.POST, "/exercises").hasRole("Contributor")
+                                                .requestMatchers(HttpMethod.POST, "/programs").hasRole("Contributor")
+                                                .requestMatchers(HttpMethod.GET, "/programs").hasRole("Contributor")
                                                 .requestMatchers(request -> request.getRequestURI().startsWith("/swagger")).permitAll()
                                                 .requestMatchers(request -> request.getRequestURI().startsWith("/v3")).permitAll()
 

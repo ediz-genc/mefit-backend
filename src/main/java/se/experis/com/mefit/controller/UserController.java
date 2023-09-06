@@ -4,7 +4,11 @@ import java.net.URI;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,6 +25,7 @@ import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.User;
 import se.experis.com.mefit.service.UserService;
 
+@CrossOrigin(origins = "*")
 @Tag(name = "User", description = "Crud and more relating to users")
 @RestController
 @RequestMapping(path = "api/v1/users")
@@ -32,11 +37,14 @@ public class UserController {
         this.userService = userService;
     }
 
+    @CrossOrigin(origins = "*")
     @Operation(summary = "Get all users")
     @GetMapping
     public ResponseEntity<Set<User>> getAll() {
         Set<User> users = userService.findAll();
-        return ResponseEntity.ok(users);
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Access-Control-Allow-Origin", "*");
+        return new ResponseEntity<Set<User>>(users, responseHeaders, HttpStatus.OK);
     }
 
     @Operation(summary = "Get a user with given id")

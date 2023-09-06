@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import se.experis.com.mefit.model.Exercise;
 import se.experis.com.mefit.service.ExerciseService;
 
+@CrossOrigin
 @Tag(name = "Exercise", description = "Crud and more for exercises")
 @RestController
 @RequestMapping(path = "api/v1/exercises")
