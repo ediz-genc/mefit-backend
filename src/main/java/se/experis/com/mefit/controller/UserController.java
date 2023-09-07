@@ -104,4 +104,14 @@ public class UserController {
         return ResponseEntity.ok(goalDtos);
     }
 
+    @Operation(summary = "Check if a user exists")
+    @GetMapping("{id}/exists")
+    public ResponseEntity<Boolean> userExists(@PathVariable String id) {
+        User user = userService.findById(id);
+        if (user != null) {
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.ok(false);
+    }
+
 }
