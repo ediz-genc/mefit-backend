@@ -28,7 +28,7 @@ public class GoalMapperImpl extends GoalMapper {
         goalDto.setUserId(goal.getUser().getId());
         goalDto.setProgramId(goal.getPrograms().stream().map(s -> s.getId()).collect(Collectors.toSet()));
         goalDto.setWorkoutId(goal.getWorkouts().stream().map(s -> s.getId()).collect(Collectors.toSet()));
-        goalDto.setCompletedWorkoutId(
+        goalDto.setCompletedProgramId(
                 goal.getCompletedPrograms().stream().map(s -> s.getId()).collect(Collectors.toSet()));
         goalDto.setCompletedWorkoutId(
                 goal.getCompletedWorkouts().stream().map(s -> s.getId()).collect(Collectors.toSet()));

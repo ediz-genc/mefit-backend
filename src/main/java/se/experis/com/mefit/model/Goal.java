@@ -57,9 +57,9 @@ public class Goal {
     @ManyToMany(mappedBy = "completedInGoal")
     private Set<Workout> completedWorkouts;
 
-    public Set<Program> getPrograms() {
-        return programs;
-    }
+    // public Set<Program> getPrograms() {
+    // return programs;
+    // }
 
     // @JsonGetter("programs")
     // public Set<String> jsonGetPrograms() {
