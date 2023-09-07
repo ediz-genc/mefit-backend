@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GoalDto {
-    private int id;
+    private Integer id;
 
     private String name;
 
@@ -23,5 +23,9 @@ public class GoalDto {
 
     private Set<Integer> programId;
 
+    private Set<Integer> finishedProgramId;
+
     private Set<Integer> workoutId;
+
+    private Set<Integer> completedWorkoutId;
 }

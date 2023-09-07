@@ -15,7 +15,7 @@ public class PutUserDto {
 
     private String bio;
 
-    private int weight;
+    private Integer weight;
 
     private double length;
 }

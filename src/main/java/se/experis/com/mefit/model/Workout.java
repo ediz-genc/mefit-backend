@@ -24,7 +24,7 @@ public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "workout_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "workout_name")
     private String name;

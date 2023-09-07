@@ -9,7 +9,7 @@ import se.experis.com.mefit.model.FitnessLevel;
 @Getter
 @Setter
 public class ExerciseDto {
-    private int id;
+    private Integer id;
 
     private String name;
 

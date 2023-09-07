@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class WorkoutDto {
-    private int id;
+    private Integer id;
 
     private String name;
 
