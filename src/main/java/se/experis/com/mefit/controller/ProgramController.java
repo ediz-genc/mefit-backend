@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import se.experis.com.mefit.mapper.ProgramMapper;
+import se.experis.com.mefit.mapper.abstracts.ProgramMapper;
 import se.experis.com.mefit.model.Program;
-import se.experis.com.mefit.model.DTOs.ProgramDto;
-import se.experis.com.mefit.model.DTOs.PutProgramDto;
-import se.experis.com.mefit.service.ProgramService;
+import se.experis.com.mefit.model.DTOs.ProgramDtos.ProgramDto;
+import se.experis.com.mefit.model.DTOs.ProgramDtos.PutProgramDto;
+import se.experis.com.mefit.service.interfaces.ProgramService;
 
 @Tag(name = "Programs", description = "Crude and more for programs")
 @RestController

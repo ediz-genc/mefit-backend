@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import se.experis.com.mefit.mapper.ExerciseMapper;
+import se.experis.com.mefit.mapper.abstracts.ExerciseMapper;
 import se.experis.com.mefit.model.Exercise;
-import se.experis.com.mefit.model.DTOs.ExerciseDto;
-import se.experis.com.mefit.model.DTOs.PutExerciseDto;
-import se.experis.com.mefit.service.ExerciseService;
+import se.experis.com.mefit.model.DTOs.ExerciseDtos.ExerciseDto;
+import se.experis.com.mefit.model.DTOs.ExerciseDtos.PutExerciseDto;
+import se.experis.com.mefit.service.interfaces.ExerciseService;
 
 @Tag(name = "Exercise", description = "Crud and more for exercises")
 @RestController
