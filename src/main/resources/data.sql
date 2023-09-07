@@ -1,15 +1,15 @@
 INSERT INTO tb_user (user_key_id, user_length, user_weight, user_bio, user_pic_url, user_username)
 VALUES
-    ("sgsg#q35", 170, 65, 'Fitness enthusiast and nature lover.', 'https://example.com/user1.jpg', 'fitNatureLover'),
-    ("3542EF34", 160, 55, 'Foodie and traveler.', 'https://example.com/user2.jpg', 'wanderlustFoodie'),
-    ("23#45gss", 175, 70, 'Tech geek and aspiring astronaut.', 'https://example.com/user3.jpg', 'techSpaceFan'),
-    ("adf#%%r3", 180, 80, 'Bookworm and coffee addict.', 'https://example.com/user4.jpg', 'bookishBrew'),
-    ("geg#%&df", 165, 50, 'Artist and dreamer.', 'https://example.com/user5.jpg', 'creativeDream'),
-    ("#ea#345", 172, 68, 'Sports lover and adventurer.', 'https://example.com/user6.jpg', 'activeExplorer'),
-    ("dfa245#%", 155, 48, 'Musician and night owl.', 'https://example.com/user7.jpg', 'melodicNight'),
-    ("345<adf", 185, 75, 'Animal lover and environmentalist.', 'https://example.com/user8.jpg', 'ecoAnimalFriend'),
-    ("aaf#¤ae", 168, 58, 'Fashionista and travel enthusiast.', 'https://example.com/user9.jpg', 'stylishJourney'),
-    ("dsus#%45", 178, 72, 'Cooking enthusiast and aspiring chef.', 'https://example.com/user10.jpg', 'culinaryArtist');
+    ('sgsg#q3', 170, 65, 'Fitness enthusiast and nature lover.', 'https://example.com/user1.jpg', 'fitNatureLover'),
+    ('3542EF3', 160, 55, 'Foodie and traveler.', 'https://example.com/user2.jpg', 'wanderlustFoodie'),
+    ('23#45gs', 175, 70, 'Tech geek and aspiring astronaut.', 'https://example.com/user3.jpg', 'techSpaceFan'),
+    ('adf#%%r', 180, 80, 'Bookworm and coffee addict.', 'https://example.com/user4.jpg', 'bookishBrew'),
+    ('geg#%&d', 165, 50, 'Artist and dreamer.', 'https://example.com/user5.jpg', 'creativeDream'),
+    ('#ea#345', 172, 68, 'Sports lover and adventurer.', 'https://example.com/user6.jpg', 'activeExplorer'),
+    ('dfa245#', 155, 48, 'Musician and night owl.', 'https://example.com/user7.jpg', 'melodicNight'),
+    ('345<adf', 185, 75, 'Animal lover and environmentalist.', 'https://example.com/user8.jpg', 'ecoAnimalFriend'),
+    ('aaf#¤ae', 168, 58, 'Fashionista and travel enthusiast.', 'https://example.com/user9.jpg', 'stylishJourney'),
+    ('dsus#%4', 178, 72, 'Cooking enthusiast and aspiring chef.', 'https://example.com/user10.jpg', 'culinaryArtist');
 
 INSERT INTO tb_exercise (exercise_name, muscle_group, exercise_desc, exercise_img_url, exercise_vid_url, fitness_lvl)
 VALUES
