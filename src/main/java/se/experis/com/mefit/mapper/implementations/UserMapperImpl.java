@@ -20,12 +20,13 @@ public class UserMapperImpl extends UserMapper {
         UserDto userDto = new UserDto();
 
         userDto.setId(user.getId());
-        userDto.setKeyId(user.getKeyId());
         userDto.setUsername(user.getUsername());
         userDto.setBio(user.getBio());
         userDto.setWeight(user.getWeight());
         userDto.setLength(user.getLength());
-        userDto.setCurrentGoalId(user.getId());
+        if (user.getCurrentGoal() != null) {
+            userDto.setCurrentGoalId(user.getCurrentGoal().getId());
+        }
         userDto.setProfilePicUrl(user.getProfilePicUrl());
         userDto.setGoalHistoryId(user.getGoalHistory().stream().map(s -> s.getId()).collect(Collectors.toSet()));
 
@@ -40,7 +41,6 @@ public class UserMapperImpl extends UserMapper {
         User user = new User();
 
         user.setId(userDto.getId());
-        user.setKeyId(userDto.getKeyId());
         user.setBio(userDto.getBio());
         user.setUsername(userDto.getUsername());
         user.setProfilePicUrl(userDto.getProfilePicUrl());
@@ -53,14 +53,13 @@ public class UserMapperImpl extends UserMapper {
     }
 
     @Override
-    public User putUserDtoToUser(Integer id, PutUserDto putUserDto) {
+    public User putUserDtoToUser(String id, PutUserDto putUserDto) {
         if (putUserDto == null) {
             return null;
         }
         User user = new User();
 
         user.setId(id);
-        user.setKeyId(putUserDto.getKeyId());
         user.setBio(putUserDto.getBio());
         user.setUsername(putUserDto.getUsername());
         user.setProfilePicUrl(putUserDto.getProfilePicUrl());

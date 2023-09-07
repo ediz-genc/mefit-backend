@@ -55,7 +55,7 @@ public class UserController {
 
     @Operation(summary = "Get a user with given id")
     @GetMapping("{id}")
-    public ResponseEntity<UserDto> getById(@PathVariable int id) {
+    public ResponseEntity<UserDto> getById(@PathVariable String id) {
         UserDto userDto = userMapper.userToUserDto(userService.findById(id));
         return ResponseEntity.ok(userDto);
     }
@@ -70,7 +70,7 @@ public class UserController {
 
     @Operation(summary = "Update an existing user with given id")
     @PutMapping("{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable int id, PutUserDto putUserDto) {
+    public ResponseEntity<Void> updateUser(@PathVariable String id, PutUserDto putUserDto) {
         User oldUser = userService.findById(id);
         User updatedUser = userMapper.putUserDtoToUser(id, putUserDto);
         updatedUser.setCurrentGoal(oldUser.getCurrentGoal());
@@ -82,14 +82,14 @@ public class UserController {
 
     @Operation(summary = "Delete existing user with given id")
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable String id) {
         userService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
     @Operation(summary = "Add goal to user with given id")
     @PatchMapping("{id}")
-    public ResponseEntity<Void> addGoal(@PathVariable int id, @RequestBody GoalDto goalDto) {
+    public ResponseEntity<Void> addGoal(@PathVariable String id, @RequestBody GoalDto goalDto) {
         User userResponse = userService.addGoal(goalMapper.goalDtoToGoal(goalDto), id);
         URI location = URI.create("goals/" + userResponse.getId());
         return ResponseEntity.created(location).build();
@@ -97,11 +97,21 @@ public class UserController {
 
     @Operation(summary = "Get goal-history from a user")
     @GetMapping("{id}/history")
-    public ResponseEntity<Set<GoalDto>> getGoalHistory(@PathVariable int id) {
+    public ResponseEntity<Set<GoalDto>> getGoalHistory(@PathVariable String id) {
         User user = userService.findById(id);
         Set<Goal> userGoals = user.getGoalHistory();
         Set<GoalDto> goalDtos = userGoals.stream().map(s -> goalMapper.goalToGoalDto(s)).collect(Collectors.toSet());
         return ResponseEntity.ok(goalDtos);
+    }
+
+    @Operation(summary = "Check if a user exists")
+    @GetMapping("{id}/exists")
+    public ResponseEntity<Boolean> userExists(@PathVariable String id) {
+        User user = userService.findById(id);
+        if (user != null) {
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.ok(false);
     }
 
 }

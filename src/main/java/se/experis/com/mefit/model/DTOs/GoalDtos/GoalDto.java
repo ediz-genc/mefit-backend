@@ -19,7 +19,7 @@ public class GoalDto {
 
     private Boolean completed;
 
-    private Integer userId;
+    private String userId;
 
     private Set<Integer> programId;
 

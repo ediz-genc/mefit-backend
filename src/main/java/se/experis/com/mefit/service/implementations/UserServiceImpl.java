@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(Integer id) {
+    public User findById(String id) {
         return userRepository.findById(id).orElseThrow();
     }
 
@@ -36,18 +36,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(Integer id, User user) {
+    public User update(String id, User user) {
         return userRepository.save(user);
 
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(String id) {
         userRepository.deleteById(id);
     }
 
     @Override
-    public User addGoal(Goal goal, Integer id) {
+    public User addGoal(Goal goal, String id) {
         User user = userRepository.findById(id).get();
 
         user.setCurrentGoal(goal);
