@@ -1,4 +1,4 @@
-INSERT INTO tb_user (user_keyId, user_length, user_weight, user_bio, user_pic_url, user_username)
+INSERT INTO tb_user (user_key_id, user_length, user_weight, user_bio, user_pic_url, user_username)
 VALUES
     ("sgsg#q35", 170, 65, 'Fitness enthusiast and nature lover.', 'https://example.com/user1.jpg', 'fitNatureLover'),
     ("3542EF34", 160, 55, 'Foodie and traveler.', 'https://example.com/user2.jpg', 'wanderlustFoodie'),
