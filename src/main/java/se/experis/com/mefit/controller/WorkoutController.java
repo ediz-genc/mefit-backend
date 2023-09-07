@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import se.experis.com.mefit.mapper.WorkoutMapper;
+import se.experis.com.mefit.mapper.abstracts.WorkoutMapper;
 import se.experis.com.mefit.model.Workout;
-import se.experis.com.mefit.model.DTOs.PutWorkoutDto;
-import se.experis.com.mefit.model.DTOs.WorkoutDto;
-import se.experis.com.mefit.service.WorkoutService;
+import se.experis.com.mefit.model.DTOs.WorkoutDtos.PutWorkoutDto;
+import se.experis.com.mefit.model.DTOs.WorkoutDtos.WorkoutDto;
+import se.experis.com.mefit.service.interfaces.WorkoutService;
 
 @CrossOrigin
 @Tag(name = "Workout", description = "Crud and more mor workout")

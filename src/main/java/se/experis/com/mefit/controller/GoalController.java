@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import se.experis.com.mefit.mapper.GoalMapper;
-import se.experis.com.mefit.mapper.WorkoutMapper;
+import se.experis.com.mefit.mapper.abstracts.GoalMapper;
+import se.experis.com.mefit.mapper.abstracts.WorkoutMapper;
 import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.Workout;
-import se.experis.com.mefit.model.DTOs.GoalDto;
-import se.experis.com.mefit.model.DTOs.PutGoalDto;
-import se.experis.com.mefit.model.DTOs.WorkoutDto;
-import se.experis.com.mefit.service.GoalService;
+import se.experis.com.mefit.model.DTOs.GoalDtos.GoalDto;
+import se.experis.com.mefit.model.DTOs.GoalDtos.PutGoalDto;
+import se.experis.com.mefit.model.DTOs.WorkoutDtos.WorkoutDto;
+import se.experis.com.mefit.service.interfaces.GoalService;
 
 @CrossOrigin
 @Tag(name = "Goals", description = "Crud and more for managing goals")

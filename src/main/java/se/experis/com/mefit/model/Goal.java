@@ -27,7 +27,7 @@ public class Goal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "goal_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "goal_name")
     private String name;
@@ -47,6 +47,9 @@ public class Goal {
 
     @ManyToMany(mappedBy = "goals")
     private Set<Program> programs;
+
+    @ManyToMany(mappedBy = "completedInGoal")
+    private Set<Program> completedPrograms;
 
     @ManyToMany(mappedBy = "goals")
     private Set<Workout> workouts;
