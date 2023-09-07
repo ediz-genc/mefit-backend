@@ -90,4 +90,20 @@ public class GoalServiceImpl implements GoalService {
         return workouts;
     }
 
+    @Override
+    public Set<Program> getCompletedPrograms(Integer id) {
+        Goal goal = goalRepository.findById(id).get();
+
+        Set<Program> completedPrograms = goal.getCompletedPrograms();
+        return completedPrograms;
+    }
+
+    @Override
+    public Set<Program> getPrograms(Integer id) {
+        Goal goal = goalRepository.findById(id).get();
+
+        Set<Program> programs = goal.getPrograms();
+        return programs;
+    }
+
 }
