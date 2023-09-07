@@ -38,7 +38,7 @@ public abstract class GoalMapper {
     public abstract GoalDto goalToGoalDto(Goal goal);
 
     @Named("userIdsToUsers")
-    public Set<User> mapUserIdsToUsers(Set<Integer> source) {
+    public Set<User> mapUserIdsToUsers(Set<String> source) {
         if (source == null) {
             return null;
         }
@@ -62,7 +62,7 @@ public abstract class GoalMapper {
     }
 
     @Named("mapUserIdToUser")
-    public User mapUserIdToUser(Integer id) {
+    public User mapUserIdToUser(String id) {
         if (id == null) {
             return null;
         }

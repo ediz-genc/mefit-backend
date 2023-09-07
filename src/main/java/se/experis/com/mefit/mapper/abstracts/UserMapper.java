@@ -41,5 +41,5 @@ public abstract class UserMapper {
 
     public abstract User userDtoToUser(UserDto userDto);
 
-    public abstract User putUserDtoToUser(Integer id, PutUserDto putUserDto);
+    public abstract User putUserDtoToUser(String id, PutUserDto putUserDto);
 }

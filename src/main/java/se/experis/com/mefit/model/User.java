@@ -7,8 +7,8 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -23,12 +23,9 @@ import lombok.Setter;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Integer id;
-
-    @Column(name = "user_key_id")
-    private String keyId;
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", unique = true)
+    private String id;
 
     @Column(name = "user_username")
     private String username;

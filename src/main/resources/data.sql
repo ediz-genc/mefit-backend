@@ -1,4 +1,4 @@
-INSERT INTO tb_user (user_key_id, user_length, user_weight, user_bio, user_pic_url, user_username)
+INSERT INTO tb_user (user_id, user_length, user_weight, user_bio, user_pic_url, user_username)
 VALUES
     ('sgsg#q3', 170, 65, 'Fitness enthusiast and nature lover.', 'https://example.com/user1.jpg', 'fitNatureLover'),
     ('3542EF3', 160, 55, 'Foodie and traveler.', 'https://example.com/user2.jpg', 'wanderlustFoodie'),
@@ -32,13 +32,13 @@ INSERT INTO tb_goal (goal_name, start_date, end_date, completed)
 VALUES 
     ('Week 1', '2023-09-04', '2023-09-10', false), ('Week 2', '2023-09-04', '2023-09-10', false), ('Week 3', '2023-09-04', '2023-09-10', false);
 
-UPDATE tb_user SET current_goal_goal_id = 1 WHERE user_id = 1;
-UPDATE tb_user SET current_goal_goal_id = 2 WHERE user_id = 3;
-UPDATE tb_user SET current_goal_goal_id = 3 WHERE user_id = 2;
+UPDATE tb_user SET current_goal_goal_id = 1 WHERE user_id = 'sgsg#q3';
+UPDATE tb_user SET current_goal_goal_id = 2 WHERE user_id = '3542EF3';
+UPDATE tb_user SET current_goal_goal_id = 3 WHERE user_id = '23#45gs';
 
-UPDATE tb_goal SET user_id = 1 WHERE goal_id = 1;
-UPDATE tb_goal SET user_id = 3 WHERE goal_id = 2;
-UPDATE tb_goal SET user_id = 2 WHERE goal_id = 3;
+UPDATE tb_goal SET user_id = 'sgsg#q3' WHERE goal_id = 1;
+UPDATE tb_goal SET user_id = '23#45gs' WHERE goal_id = 3;
+UPDATE tb_goal SET user_id = '3542EF3' WHERE goal_id = 2;
 
 INSERT INTO tb_program (program_category, program_desc, program_img_url, program_name)
 VALUES 

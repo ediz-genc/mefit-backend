@@ -19,4 +19,5 @@ public interface GoalService extends CrudService<Goal, Integer> {
     Set<Program> getCompletedPrograms(Integer id);
 
     Set<Program> getPrograms(Integer id);
+
 }

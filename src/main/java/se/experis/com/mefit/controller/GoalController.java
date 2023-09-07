@@ -25,12 +25,15 @@ import se.experis.com.mefit.mapper.abstracts.ProgramMapper;
 import se.experis.com.mefit.mapper.abstracts.WorkoutMapper;
 import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.Program;
+import se.experis.com.mefit.model.User;
 import se.experis.com.mefit.model.Workout;
 import se.experis.com.mefit.model.DTOs.GoalDtos.GoalDto;
 import se.experis.com.mefit.model.DTOs.GoalDtos.PutGoalDto;
 import se.experis.com.mefit.model.DTOs.ProgramDtos.ProgramDto;
 import se.experis.com.mefit.model.DTOs.WorkoutDtos.WorkoutDto;
 import se.experis.com.mefit.service.interfaces.GoalService;
+import se.experis.com.mefit.service.interfaces.UserService;
+import se.experis.com.mefit.service.interfaces.WorkoutService;
 
 @CrossOrigin
 @Tag(name = "Goals", description = "Crud and more for managing goals")
@@ -39,16 +42,20 @@ import se.experis.com.mefit.service.interfaces.GoalService;
 public class GoalController {
     private final GoalService goalService;
     private final GoalMapper goalMapper;
+    private final WorkoutService workoutService;
     private final WorkoutMapper workoutMapper;
     private final ProgramMapper programMapper;
+    private final UserService userService;
 
     @Autowired
     public GoalController(GoalService goalService, GoalMapper goalMapper, WorkoutMapper workoutMapper,
-            ProgramMapper programMapper) {
+            ProgramMapper programMapper, UserService userService, WorkoutService workoutService) {
         this.goalService = goalService;
         this.goalMapper = goalMapper;
         this.workoutMapper = workoutMapper;
         this.programMapper = programMapper;
+        this.userService = userService;
+        this.workoutService = workoutService;
     }
 
     @Operation(summary = "Get all goals")
@@ -172,5 +179,18 @@ public class GoalController {
 
         Set<ProgramDto> dtos = all.stream().map(s -> programMapper.programToProgramDto(s)).collect(Collectors.toSet());
         return ResponseEntity.ok(dtos);
+    }
+
+    @Operation(summary = "Move a workout in a goal from pending to completed")
+    @PatchMapping("{userId}/workout/{workoutId}")
+    public ResponseEntity<Void> setWorkoutToCompleted(@PathVariable int workoutId, @PathVariable String userId) {
+        User user = userService.findById(userId);
+        Goal userGoal = user.getCurrentGoal();
+        Workout workout = workoutService.findById(workoutId);
+        userGoal.getCompletedWorkouts().add(workout);
+        userGoal.getWorkouts().remove(workout);
+
+        workout.getCompletedInGoal().add(userGoal);
+        return null;
     }
 }
