@@ -29,6 +29,8 @@ public class GoalMapperImpl extends GoalMapper {
         goalDto.setProgramId(goal.getPrograms().stream().map(s -> s.getId()).collect(Collectors.toSet()));
         goalDto.setWorkoutId(goal.getWorkouts().stream().map(s -> s.getId()).collect(Collectors.toSet()));
         goalDto.setCompletedWorkoutId(
+                goal.getCompletedPrograms().stream().map(s -> s.getId()).collect(Collectors.toSet()));
+        goalDto.setCompletedWorkoutId(
                 goal.getCompletedWorkouts().stream().map(s -> s.getId()).collect(Collectors.toSet()));
         return goalDto;
     }
@@ -49,6 +51,7 @@ public class GoalMapperImpl extends GoalMapper {
         goal.setPrograms(mapProgramIdsToPrograms(goalDto.getProgramId()));
         goal.setWorkouts(mapWorkoutIdsToWorkouts(goalDto.getWorkoutId()));
         goal.setCompletedWorkouts(mapWorkoutIdsToWorkouts(goalDto.getCompletedWorkoutId()));
+        goal.setCompletedPrograms(mapProgramIdsToPrograms(goalDto.getCompletedProgramId()));
 
         return goal;
     }

@@ -23,7 +23,7 @@ public class GoalDto {
 
     private Set<Integer> programId;
 
-    private Set<Integer> finishedProgramId;
+    private Set<Integer> completedProgramId;
 
     private Set<Integer> workoutId;
 
