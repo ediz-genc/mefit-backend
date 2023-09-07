@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import se.experis.com.mefit.mapper.GoalMapper;
-import se.experis.com.mefit.mapper.UserMapper;
+import se.experis.com.mefit.mapper.abstracts.GoalMapper;
+import se.experis.com.mefit.mapper.abstracts.UserMapper;
 import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.User;
-import se.experis.com.mefit.model.DTOs.GoalDto;
-import se.experis.com.mefit.model.DTOs.PutUserDto;
-import se.experis.com.mefit.model.DTOs.UserDto;
-import se.experis.com.mefit.service.UserService;
+import se.experis.com.mefit.model.DTOs.GoalDtos.GoalDto;
+import se.experis.com.mefit.model.DTOs.UserDtos.PutUserDto;
+import se.experis.com.mefit.model.DTOs.UserDtos.UserDto;
+import se.experis.com.mefit.service.interfaces.UserService;
 
 @CrossOrigin(origins = "*")
 @Tag(name = "User", description = "Crud and more relating to users")
