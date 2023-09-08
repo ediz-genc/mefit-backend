@@ -24,4 +24,10 @@ public class UserDto {
     private Integer currentGoalId;
 
     private Set<Integer> goalHistoryId;
+
+    @Override
+    public String toString() {
+        return this.id + " " + this.username + " " + this.profilePicUrl + " " + this.bio + " " + this.weight + " "
+                + this.length + " " + this.currentGoalId + " " + this.goalHistoryId;
+    }
 }

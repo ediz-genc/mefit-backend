@@ -21,7 +21,10 @@ import lombok.Setter;
 @Entity
 @Table(name = "tb_user")
 public class User {
-
+    public User() {}
+    public User(String id) {
+        this.id = id;
+    }
     @Id
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", unique = true)
@@ -72,5 +75,10 @@ public class User {
     // }
     // return null;
     // }
-
+    
+    @Override
+    public String toString() {
+        return this.id + " " + this.username + " " + this.profilePicUrl + " " + this.bio + " " + this.weight + " "
+                + this.length + " " + this.currentGoal + " " + this.goalHistory;
+    }
 }

@@ -38,15 +38,17 @@ public class UserMapperImpl extends UserMapper {
         if (userDto == null) {
             return null;
         }
-        User user = new User();
+        User user = new User(userDto.getId());
 
-        user.setId(userDto.getId());
+        
         user.setBio(userDto.getBio());
         user.setUsername(userDto.getUsername());
         user.setProfilePicUrl(userDto.getProfilePicUrl());
         user.setLength(userDto.getLength());
         user.setWeight(userDto.getWeight());
-        user.setCurrentGoal(mapGoalIdToGoal(userDto.getCurrentGoalId()));
+        if(userDto.getCurrentGoalId() != 0){
+            user.setCurrentGoal(mapGoalIdToGoal(userDto.getCurrentGoalId()));
+        }
         user.setGoalHistory(mapGoalIdsToGoals(userDto.getGoalHistoryId()));
 
         return user;
@@ -57,9 +59,9 @@ public class UserMapperImpl extends UserMapper {
         if (putUserDto == null) {
             return null;
         }
-        User user = new User();
+        User user = new User(id);
 
-        user.setId(id);
+        
         user.setBio(putUserDto.getBio());
         user.setUsername(putUserDto.getUsername());
         user.setProfilePicUrl(putUserDto.getProfilePicUrl());
