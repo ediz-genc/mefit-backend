@@ -46,7 +46,7 @@ public class UserMapperImpl extends UserMapper {
         user.setProfilePicUrl(userDto.getProfilePicUrl());
         user.setLength(userDto.getLength());
         user.setWeight(userDto.getWeight());
-        if(userDto.getCurrentGoalId() != null){
+        if(userDto.getCurrentGoalId() != 0) {
             user.setCurrentGoal(mapGoalIdToGoal(userDto.getCurrentGoalId()));
         }
         user.setGoalHistory(mapGoalIdsToGoals(userDto.getGoalHistoryId()));
