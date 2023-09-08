@@ -21,12 +21,19 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import se.experis.com.mefit.mapper.abstracts.GoalMapper;
+import se.experis.com.mefit.mapper.abstracts.ProgramMapper;
 import se.experis.com.mefit.mapper.abstracts.UserMapper;
+import se.experis.com.mefit.mapper.abstracts.WorkoutMapper;
 import se.experis.com.mefit.model.Goal;
+import se.experis.com.mefit.model.Program;
 import se.experis.com.mefit.model.User;
+import se.experis.com.mefit.model.Workout;
 import se.experis.com.mefit.model.DTOs.GoalDtos.GoalDto;
+import se.experis.com.mefit.model.DTOs.ProgramDtos.ProgramDto;
 import se.experis.com.mefit.model.DTOs.UserDtos.PutUserDto;
 import se.experis.com.mefit.model.DTOs.UserDtos.UserDto;
+import se.experis.com.mefit.model.DTOs.WorkoutDtos.WorkoutDto;
+import se.experis.com.mefit.service.interfaces.GoalService;
 import se.experis.com.mefit.service.interfaces.UserService;
 
 @CrossOrigin(origins = "*")
@@ -37,12 +44,18 @@ public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
     private final GoalMapper goalMapper;
+    private final WorkoutMapper workoutMapper;
+    private final ProgramMapper programMapper;
 
     @Autowired
-    public UserController(UserService userService, UserMapper userMapper, GoalMapper goalMapper) {
+    public UserController(UserService userService, UserMapper userMapper, GoalMapper goalMapper,
+            GoalService goalService, WorkoutMapper workoutMapper, ProgramMapper programMapper) {
         this.userService = userService;
         this.userMapper = userMapper;
         this.goalMapper = goalMapper;
+        this.workoutMapper = workoutMapper;
+        this.programMapper = programMapper;
+
     }
 
     @Operation(summary = "Get all users")
@@ -112,6 +125,50 @@ public class UserController {
             return ResponseEntity.ok(true);
         }
         return ResponseEntity.ok(false);
+    }
+
+    @Operation(summary = "Get completed workouts in users current goal")
+    @GetMapping("{id}/workouts/completed")
+    ResponseEntity<Set<WorkoutDto>> getCompletedWorkouts(@PathVariable String id) {
+        User user = userService.findById(id);
+        Goal currentGoal = user.getCurrentGoal();
+        Set<Workout> completedWorkouts = currentGoal.getCompletedWorkouts();
+        Set<WorkoutDto> completedWorkoutDtos = completedWorkouts.stream().map(s -> workoutMapper.workoutToWorkoutDto(s))
+                .collect(Collectors.toSet());
+        return ResponseEntity.ok(completedWorkoutDtos);
+    }
+
+    @Operation(summary = "Get pending workouts in users current goal")
+    @GetMapping("{id}/workouts/pending")
+    ResponseEntity<Set<WorkoutDto>> getPendingWorkouts(@PathVariable String id) {
+        User user = userService.findById(id);
+        Goal currentGoal = user.getCurrentGoal();
+        Set<Workout> pendingWorkouts = currentGoal.getWorkouts();
+        Set<WorkoutDto> pendingWorkoutDtos = pendingWorkouts.stream().map(s -> workoutMapper.workoutToWorkoutDto(s))
+                .collect(Collectors.toSet());
+        return ResponseEntity.ok(pendingWorkoutDtos);
+    }
+
+    @Operation(summary = "Get completed programs in users current goal")
+    @GetMapping("{id}/programs/completed")
+    ResponseEntity<Set<ProgramDto>> getCompletedPrograms(@PathVariable String id) {
+        User user = userService.findById(id);
+        Goal currentGoal = user.getCurrentGoal();
+        Set<Program> completedPrograms = currentGoal.getCompletedPrograms();
+        Set<ProgramDto> completedProgramDtos = completedPrograms.stream().map(s -> programMapper.programToProgramDto(s))
+                .collect(Collectors.toSet());
+        return ResponseEntity.ok(completedProgramDtos);
+    }
+
+    @Operation(summary = "Get pending programs in users current goal")
+    @GetMapping("{id}/programs/pending")
+    ResponseEntity<Set<ProgramDto>> getPendingPrograms(@PathVariable String id) {
+        User user = userService.findById(id);
+        Goal currentGoal = user.getCurrentGoal();
+        Set<Program> pendingPrograms = currentGoal.getPrograms();
+        Set<ProgramDto> pendingWorkoutDtos = pendingPrograms.stream().map(s -> programMapper.programToProgramDto(s))
+                .collect(Collectors.toSet());
+        return ResponseEntity.ok(pendingWorkoutDtos);
     }
 
 }
