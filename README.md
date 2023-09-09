@@ -128,7 +128,7 @@ the Film API project locally.
       commands for this project.
 * [GitHub](https://www.google.se/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiDlrjRtpyBAxWdVPEDHZ5GDJ8QFnoECBcQAQ&url=https%3A%2F%2Fgithub.com%2Flogin&usg=AOvVaw0YPQjBCLvq4nLugtBaJju7&opi=89978449) => Login to your account with your **gitHub credentials**.
     * [Setup SSH key with GitHub]
-        * Create an SSH key pair `ssh-keygen` by following the [instructions]([https://docs.gitlab.com/ee/ssh/](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)) for all
+        * Create an SSH key pair `ssh-keygen` by following the [instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) for all
           OS (skip if you already have one),
         * Add your public SSH key to your GitlHub profile under ./settings/access/SSH-and-GPG-keys by following the [instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account),
         * Make sure the email you use to commit is registered under ./edit profiles/emails in gitlab.
