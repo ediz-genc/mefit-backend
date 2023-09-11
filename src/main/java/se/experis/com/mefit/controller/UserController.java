@@ -112,6 +112,9 @@ public class UserController {
     @GetMapping("{id}/history")
     public ResponseEntity<Set<GoalDto>> getGoalHistory(@PathVariable String id) {
         User user = userService.findById(id);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
         Set<Goal> userGoals = user.getGoalHistory();
         Set<GoalDto> goalDtos = userGoals.stream().map(s -> goalMapper.goalToGoalDto(s)).collect(Collectors.toSet());
         return ResponseEntity.ok(goalDtos);

@@ -22,7 +22,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(String id) {
-        return userRepository.findById(id).orElseThrow();
+        try {
+            return userRepository.findById(id).orElseThrow();
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
     @Override
