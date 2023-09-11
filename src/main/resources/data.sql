@@ -1,6 +1,6 @@
 INSERT INTO tb_user (user_id, user_length, user_weight, user_bio, user_pic_url, user_username)
 VALUES
-    ('sgsg#q3', 170, 65, 'Fitness enthusiast and nature lover.', 'https://example.com/user1.jpg', 'fitNatureLover'),
+    ('58efed46-d459-4a14-b6bb-dec9b4240f94', 170, 65, 'Fitness enthusiast and nature lover.', 'https://example.com/user1.jpg', 'fitNatureLover'),
     ('3542EF3', 160, 55, 'Foodie and traveler.', 'https://example.com/user2.jpg', 'wanderlustFoodie'),
     ('23#45gs', 175, 70, 'Tech geek and aspiring astronaut.', 'https://example.com/user3.jpg', 'techSpaceFan'),
     ('adf#%%r', 180, 80, 'Bookworm and coffee addict.', 'https://example.com/user4.jpg', 'bookishBrew'),
@@ -32,17 +32,19 @@ INSERT INTO tb_goal (goal_name, start_date, end_date, completed)
 VALUES 
     ('Week 1', '2023-09-04', '2023-09-10', false), ('Week 2', '2023-09-04', '2023-09-10', false), ('Week 3', '2023-09-04', '2023-09-10', false), ('Week 4', '2023-09-11', '2023-07-18', false);
 
-UPDATE tb_user SET current_goal_goal_id = 1 WHERE user_id = 'sgsg#q3';
+UPDATE tb_user SET current_goal_goal_id = 1 WHERE user_id = '58efed46-d459-4a14-b6bb-dec9b4240f94';
 UPDATE tb_user SET current_goal_goal_id = 2 WHERE user_id = '3542EF3';
 UPDATE tb_user SET current_goal_goal_id = 3 WHERE user_id = '23#45gs';
 
-UPDATE tb_goal SET user_id = 'sgsg#q3' WHERE goal_id = 1;
+UPDATE tb_goal SET user_id = '58efed46-d459-4a14-b6bb-dec9b4240f94' WHERE goal_id = 1;
 UPDATE tb_goal SET user_id = '23#45gs' WHERE goal_id = 3;
 UPDATE tb_goal SET user_id = '3542EF3' WHERE goal_id = 2;
 
 INSERT INTO tb_program (program_category, program_desc, program_img_url, program_name)
 VALUES 
-    ('Weight loss', 'Designed to lose weight.', 'https://example.com/program1.jpg', 'Weight loss of D00M!'), ('Muscle increase', 'Buff up!', 'https://example.com/program2.jpg', 'Get big!');
+    ('Weight loss', 'Designed to lose weight.', 'https://example.com/program1.jpg', 'Weight loss of D00M!'), 
+    ('Muscle increase', 'Buff up!', 'https://example.com/program2.jpg', 'Get big!'), 
+    ('TestCategory', 'TestDesc', 'testURL', 'testName');
 
 INSERT INTO tb_exercise_workouts (exercises_exercise_id, workouts_workout_id) 
 VALUES

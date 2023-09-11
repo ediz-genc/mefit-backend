@@ -174,4 +174,13 @@ public class UserController {
         return ResponseEntity.ok(pendingWorkoutDtos);
     }
 
+    @Operation(summary = "Get the current goal of a user with given id")
+    @GetMapping("{id}/goal")
+    ResponseEntity<GoalDto> getCurrentGoal(@PathVariable String id) {
+        User user = userService.findById(id);
+        Goal currentGoal = user.getCurrentGoal();
+        GoalDto goalDto = goalMapper.goalToGoalDto(currentGoal);
+        return ResponseEntity.ok(goalDto);
+    }
+
 }
