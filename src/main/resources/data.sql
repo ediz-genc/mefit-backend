@@ -46,15 +46,19 @@ VALUES
     ('Muscle increase', 'Buff up!', 'https://example.com/program2.jpg', 'Get big!'), 
     ('TestCategory', 'TestDesc', 'testURL', 'testName');
 
-INSERT INTO tb_exercise_workouts (exercises_exercise_id, workouts_workout_id) 
+-- INSERT INTO tb_exercise_workouts (exercises_exercise_id, workouts_workout_id) 
+-- VALUES
+-- (1,2), (2,2), (3,2), (4,2), (5,2), (10,1), (9,1), (8,1), (7,1), (6,1);
+
+INSERT INTO tb_workout_exercises (exercise_id, workout_id) 
 VALUES
 (1,2), (2,2), (3,2), (4,2), (5,2), (10,1), (9,1), (8,1), (7,1), (6,1);
 
-INSERT INTO tb_program_goals (goals_goal_id, programs_program_id)
+INSERT INTO tb_goal_programs (goal_id, program_id)
 VALUES 
 (2,1), (3,2);
 
-INSERT INTO tb_workout_goals (goals_goal_id, workouts_workout_id)
+INSERT INTO tb_goal_workouts (goal_id, workout_id)
 VALUES 
 (2,3), (3,2);
 

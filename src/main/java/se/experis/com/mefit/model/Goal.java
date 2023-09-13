@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -45,13 +46,15 @@ public class Goal {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(mappedBy = "goals")
+    @ManyToMany()
+    @JoinTable(joinColumns = @JoinColumn(name = "goal_id"), inverseJoinColumns = @JoinColumn(name = "program_id"))
     private Set<Program> programs;
 
     @ManyToMany(mappedBy = "completedInGoal")
     private Set<Program> completedPrograms;
 
-    @ManyToMany(mappedBy = "goals")
+    @ManyToMany()
+    @JoinTable(joinColumns = @JoinColumn(name = "goal_id"), inverseJoinColumns = @JoinColumn(name = "workout_id"))
     private Set<Workout> workouts;
 
     @ManyToMany(mappedBy = "completedInGoal")

@@ -46,6 +46,7 @@ public class UserController {
     private final GoalMapper goalMapper;
     private final WorkoutMapper workoutMapper;
     private final ProgramMapper programMapper;
+    private final GoalService goalService;
 
     @Autowired
     public UserController(UserService userService, UserMapper userMapper, GoalMapper goalMapper,
@@ -55,6 +56,7 @@ public class UserController {
         this.goalMapper = goalMapper;
         this.workoutMapper = workoutMapper;
         this.programMapper = programMapper;
+        this.goalService = goalService;
 
     }
 
@@ -101,10 +103,12 @@ public class UserController {
     }
 
     @Operation(summary = "Add goal to user with given id")
-    @PatchMapping("{id}")
-    public ResponseEntity<Void> addGoal(@PathVariable String id, @RequestBody GoalDto goalDto) {
-        User userResponse = userService.addGoal(goalMapper.goalDtoToGoal(goalDto), id);
-        URI location = URI.create("goals/" + userResponse.getId());
+    @PatchMapping("{id}/goal/{goalId}")
+    public ResponseEntity<Void> addGoal(@PathVariable String id, @PathVariable Integer goalId) {
+        Goal goal = goalService.findById(goalId);
+        User userResponse = userService.addGoal(goal, id);
+
+        URI location = URI.create("" + userResponse.getId());
         return ResponseEntity.created(location).build();
     }
 

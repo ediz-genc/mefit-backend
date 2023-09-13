@@ -75,10 +75,10 @@ public class GoalController {
 
     @Operation(summary = "Add a new goal")
     @PostMapping
-    public ResponseEntity<Goal> addGoal(@PathVariable GoalDto goalDto) {
+    public ResponseEntity<URI> addGoal(@RequestBody GoalDto goalDto) {
         Goal newGoal = goalService.add(goalMapper.goalDtoToGoal(goalDto));
-        URI location = URI.create("goal/" + newGoal.getId());
-        return ResponseEntity.created(location).build();
+        URI location = URI.create("" + newGoal.getId());
+        return ResponseEntity.created(location).body(location);
     }
 
     @Operation(summary = "Update existing goal by given id")

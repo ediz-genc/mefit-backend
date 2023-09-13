@@ -55,7 +55,7 @@ public class WorkoutServiceImpl implements WorkoutService {
         for (Exercise exercise : exercises) {
             exerciseList.add(exercise);
         }
-        workout.setExercises(exercises);
+        workout.setExercises(exerciseList);
         workoutRepository.save(workout);
         return workout;
 

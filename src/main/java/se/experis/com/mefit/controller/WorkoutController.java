@@ -58,6 +58,7 @@ public class WorkoutController {
     @PostMapping
     public ResponseEntity<Workout> addWorkout(@RequestBody WorkoutDto workoutDto) {
         Workout newWorkout = workoutService.add(workoutMapper.workoutDtoToWorkout(workoutDto));
+        // workoutService.addExercise(newWorkout.getId(), newWorkout.getExercises());
         URI location = URI.create("workout/" + newWorkout.getId());
         return ResponseEntity.created(location).build();
     }

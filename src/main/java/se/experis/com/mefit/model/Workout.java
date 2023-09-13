@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -32,7 +34,8 @@ public class Workout {
     @Column(name = "workout_desc")
     private String description;
 
-    @ManyToMany(mappedBy = "workouts")
+    @ManyToMany()
+    @JoinTable(joinColumns = @JoinColumn(name = "workout_id"), inverseJoinColumns = @JoinColumn(name = "exercise_id"))
     private Set<Exercise> exercises;
 
     @ManyToMany
