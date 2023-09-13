@@ -12,6 +12,7 @@ import se.experis.com.mefit.model.Exercise;
 import se.experis.com.mefit.model.Goal;
 import se.experis.com.mefit.model.Program;
 import se.experis.com.mefit.model.Workout;
+import se.experis.com.mefit.model.DTOs.WorkoutDtos.GetWorkoutExerciseDto;
 import se.experis.com.mefit.model.DTOs.WorkoutDtos.PutWorkoutDto;
 import se.experis.com.mefit.model.DTOs.WorkoutDtos.WorkoutDto;
 import se.experis.com.mefit.service.interfaces.ExerciseService;
@@ -63,5 +64,7 @@ public abstract class WorkoutMapper {
     public abstract Workout workoutDtoToWorkout(WorkoutDto workoutDto);
 
     public abstract Workout putWorkoutDtoToWorkout(Integer id, PutWorkoutDto putWorkoutDto);
+
+    public abstract GetWorkoutExerciseDto workoutToGetWorkoutExerciseDto(Workout workout);
 
 }

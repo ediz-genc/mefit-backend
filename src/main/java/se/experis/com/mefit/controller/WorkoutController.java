@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import se.experis.com.mefit.mapper.abstracts.WorkoutMapper;
 import se.experis.com.mefit.model.Workout;
+import se.experis.com.mefit.model.DTOs.WorkoutDtos.GetWorkoutExerciseDto;
 import se.experis.com.mefit.model.DTOs.WorkoutDtos.PutWorkoutDto;
 import se.experis.com.mefit.model.DTOs.WorkoutDtos.WorkoutDto;
 import se.experis.com.mefit.service.interfaces.WorkoutService;
@@ -90,5 +91,14 @@ public class WorkoutController {
         Workout workoutResponse = workoutService.addExercise(id, workoutMapper.mapExerciseIdsToExercise(exercises));
         URI location = URI.create("workouts/" + workoutResponse.getId());
         return ResponseEntity.created(location).build();
+    }
+
+    @Operation(summary = "Get all workouts including there exercises")
+    @GetMapping("/withexercises")
+    public ResponseEntity<Set<GetWorkoutExerciseDto>> getAllWorkoutsWithExercises() {
+        Set<GetWorkoutExerciseDto> getWorkoutExerciseDto = workoutService.findAll().stream()
+                .map(s -> workoutMapper.workoutToGetWorkoutExerciseDto(s))
+                .collect(Collectors.toSet());
+        return ResponseEntity.ok(getWorkoutExerciseDto);
     }
 }

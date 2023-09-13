@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import se.experis.com.mefit.mapper.abstracts.WorkoutMapper;
 import se.experis.com.mefit.model.Workout;
+import se.experis.com.mefit.model.DTOs.WorkoutDtos.GetWorkoutExerciseDto;
 import se.experis.com.mefit.model.DTOs.WorkoutDtos.PutWorkoutDto;
 import se.experis.com.mefit.model.DTOs.WorkoutDtos.WorkoutDto;
 
@@ -61,6 +62,22 @@ public class WorkoutMapperImpl extends WorkoutMapper {
         workout.setDescription(putWorkoutDto.getDescription());
 
         return workout;
+    }
+
+    @Override
+    public GetWorkoutExerciseDto workoutToGetWorkoutExerciseDto(Workout workout) {
+        if (workout == null) {
+            return null;
+        }
+
+        GetWorkoutExerciseDto getWorkoutExerciseDto = new GetWorkoutExerciseDto();
+
+        getWorkoutExerciseDto.setId(workout.getId());
+        getWorkoutExerciseDto.setName(workout.getName());
+        getWorkoutExerciseDto.setDescription(workout.getDescription());
+        getWorkoutExerciseDto.setExercises(workout.getExercises());
+
+        return getWorkoutExerciseDto;
     }
 
 }
