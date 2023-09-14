@@ -44,7 +44,7 @@ public class Program {
     @ManyToMany
     private Set<Goal> goals;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "completedPrograms")
     private Set<Goal> completedInGoal;
 
     // public Set<Goal> getGoals() {

@@ -66,10 +66,10 @@ INSERT INTO tb_workout_programs (workouts_workout_id, programs_program_id)
 VALUES
 (1,1), (2,1), (3,1), (1,2), (2,2), (3,2);
 
-INSERT INTO tb_workout_completed_in_goal (completed_in_goal_goal_id, completed_workouts_workout_id)
+INSERT INTO tb_goal_completed_workouts (completed_in_goal_goal_id, completed_workouts_workout_id)
 VALUES
 (1,2);
 
-INSERT INTO tb_program_completed_in_goal (completed_in_goal_goal_id, completed_programs_program_id)
+INSERT INTO tb_goal_completed_programs (completed_in_goal_goal_id, completed_programs_program_id)
 VALUES
 (1,1), (1,2);

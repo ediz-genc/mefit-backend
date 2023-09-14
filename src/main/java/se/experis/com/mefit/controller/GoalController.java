@@ -184,13 +184,24 @@ public class GoalController {
     @Operation(summary = "Move a workout in a goal from pending to completed")
     @PatchMapping("{userId}/workout/{workoutId}")
     public ResponseEntity<Void> setWorkoutToCompleted(@PathVariable int workoutId, @PathVariable String userId) {
+
         User user = userService.findById(userId);
         Goal userGoal = user.getCurrentGoal();
-        Workout workout = workoutService.findById(workoutId);
-        userGoal.getCompletedWorkouts().add(workout);
-        userGoal.getWorkouts().remove(workout);
 
-        workout.getCompletedInGoal().add(userGoal);
-        return null;
+        goalService.completeWorkout(userGoal.getId(), workoutId);
+        
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "Move a program in a goal from pending to completed")
+    @PatchMapping("{userId}/program/{programId}")
+    public ResponseEntity<Void> setProgramToCompleted(@PathVariable int programId, @PathVariable String userId) {
+
+        User user = userService.findById(userId);
+        Goal userGoal = user.getCurrentGoal();
+
+        goalService.completeProgram(userGoal.getId(), programId);
+        
+        return ResponseEntity.ok().build();
     }
 }

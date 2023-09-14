@@ -20,4 +20,8 @@ public interface GoalService extends CrudService<Goal, Integer> {
 
     Set<Program> getPrograms(Integer id);
 
+    Goal completeWorkout(Integer id, Integer workoutId);
+
+    Goal completeProgram(Integer id, Integer programId);
+
 }
