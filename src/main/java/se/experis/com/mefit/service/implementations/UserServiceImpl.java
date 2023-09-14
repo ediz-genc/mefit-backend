@@ -60,4 +60,13 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public User completeGoal(String id) {
+        User user = userRepository.findById(id).get();
+
+        user.setCurrentGoal(null);
+        userRepository.save(user);
+        return user;
+    }
+
 }

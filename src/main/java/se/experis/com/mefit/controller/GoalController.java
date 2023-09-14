@@ -83,7 +83,7 @@ public class GoalController {
 
     @Operation(summary = "Update existing goal by given id")
     @PutMapping("{id}")
-    public ResponseEntity<Void> updateGoal(@PathVariable int id, PutGoalDto putGoalDto) {
+    public ResponseEntity<Void> updateGoal(@PathVariable int id, @RequestBody PutGoalDto putGoalDto) {
         Goal oldGoal = goalService.findById(id);
         Goal updatedGoal = goalMapper.putGoalDtoToGoal(putGoalDto, id);
         updatedGoal.setPrograms(oldGoal.getPrograms());

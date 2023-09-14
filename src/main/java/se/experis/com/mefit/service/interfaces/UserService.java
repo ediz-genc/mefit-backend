@@ -6,4 +6,6 @@ import se.experis.com.mefit.service.CrudService;
 
 public interface UserService extends CrudService<User, String> {
     User addGoal(Goal goal, String id);
+
+    User completeGoal(String id);
 }
