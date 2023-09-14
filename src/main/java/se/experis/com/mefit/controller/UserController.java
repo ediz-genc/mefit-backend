@@ -187,4 +187,11 @@ public class UserController {
         return ResponseEntity.ok(goalDto);
     }
 
+    @Operation(summary = "Finish the current goal of a user with a given id")
+    @PutMapping("{id}/goal/finish")
+    ResponseEntity<UserDto> completeCurrentGoal(@PathVariable String id) {
+        User user = userService.completeGoal(id);
+        return ResponseEntity.ok(userMapper.userToUserDto(user));
+    }
+
 }
