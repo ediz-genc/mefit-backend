@@ -106,4 +106,46 @@ public class GoalServiceImpl implements GoalService {
         return programs;
     }
 
+    @Override
+    public Goal completeWorkout(Integer id, Integer workoutId) {
+        Goal goal = goalRepository.findById(id).get();
+
+        Set<Workout> completedWorkouts = goal.getCompletedWorkouts();
+        Set<Workout> workouts = goal.getWorkouts();
+
+        for (Workout workout : workouts) {
+            if (workout.getId() == workoutId) {
+                completedWorkouts.add(workout);
+                workouts.remove(workout);
+                break;
+            }
+        }
+
+        goal.setCompletedWorkouts(completedWorkouts);
+        goal.setWorkouts(workouts);
+        goalRepository.save(goal);
+        return goal;
+    }
+
+    @Override
+    public Goal completeProgram(Integer id, Integer programId) {
+        Goal goal = goalRepository.findById(id).get();
+
+        Set<Program> completedPrograms = goal.getCompletedPrograms();
+        Set<Program> programs = goal.getPrograms();
+
+        for (Program program : programs) {
+            if (program.getId() == programId) {
+                completedPrograms.add(program);
+                programs.remove(program);
+                break;
+            }
+        }
+
+        goal.setCompletedPrograms(completedPrograms);
+        goal.setPrograms(programs);
+        goalRepository.save(goal);
+        return goal;
+    }
+
 }

@@ -50,14 +50,14 @@ public class Goal {
     @JoinTable(joinColumns = @JoinColumn(name = "goal_id"), inverseJoinColumns = @JoinColumn(name = "program_id"))
     private Set<Program> programs;
 
-    @ManyToMany(mappedBy = "completedInGoal")
+    @ManyToMany
     private Set<Program> completedPrograms;
 
     @ManyToMany()
     @JoinTable(joinColumns = @JoinColumn(name = "goal_id"), inverseJoinColumns = @JoinColumn(name = "workout_id"))
     private Set<Workout> workouts;
 
-    @ManyToMany(mappedBy = "completedInGoal")
+    @ManyToMany
     private Set<Workout> completedWorkouts;
 
     // public Set<Program> getPrograms() {
