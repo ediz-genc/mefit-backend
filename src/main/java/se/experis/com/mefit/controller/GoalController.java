@@ -42,7 +42,6 @@ import se.experis.com.mefit.service.interfaces.WorkoutService;
 public class GoalController {
     private final GoalService goalService;
     private final GoalMapper goalMapper;
-    private final WorkoutService workoutService;
     private final WorkoutMapper workoutMapper;
     private final ProgramMapper programMapper;
     private final UserService userService;
@@ -55,7 +54,6 @@ public class GoalController {
         this.workoutMapper = workoutMapper;
         this.programMapper = programMapper;
         this.userService = userService;
-        this.workoutService = workoutService;
     }
 
     @Operation(summary = "Get all goals")
@@ -189,7 +187,7 @@ public class GoalController {
         Goal userGoal = user.getCurrentGoal();
 
         goalService.completeWorkout(userGoal.getId(), workoutId);
-        
+
         return ResponseEntity.ok().build();
     }
 
@@ -201,7 +199,7 @@ public class GoalController {
         Goal userGoal = user.getCurrentGoal();
 
         goalService.completeProgram(userGoal.getId(), programId);
-        
+
         return ResponseEntity.ok().build();
     }
 }
