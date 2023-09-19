@@ -9,11 +9,7 @@ public class PutUserDto {
 
     private String username;
 
-    private String keyId;
-
     private String profilePicUrl;
-
-    private String vidUrl;
 
     private String bio;
 

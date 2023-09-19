@@ -85,7 +85,7 @@ public class UserController {
 
     @Operation(summary = "Update an existing user with given id")
     @PutMapping("{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable String id, PutUserDto putUserDto) {
+    public ResponseEntity<Void> updateUser(@PathVariable String id, @RequestBody PutUserDto putUserDto) {
         User oldUser = userService.findById(id);
         User updatedUser = userMapper.putUserDtoToUser(id, putUserDto);
         updatedUser.setCurrentGoal(oldUser.getCurrentGoal());
