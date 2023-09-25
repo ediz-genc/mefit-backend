@@ -14,7 +14,7 @@ In this journey, be prepared to leverage the power of teamwork and technical pro
 <br>
 <br>
 <div align="center">
-  <center><img src="assets/person.png" alt="MeFIT" width="600"/></center>
+  <center><img src="assets/imgs/backendimg.png" alt="MeFIT" width="600"/></center>
 </div>
 <br>
 <br>
@@ -72,6 +72,67 @@ Join us today and experience the power of MeFIT as your trusted companion to a f
 
 _Project tree will be printed here_
 
+```Bash
+├───.mvn
+│   └───wrapper
+├───.vscode
+├───assets
+│   └───imgs
+├───src
+│   ├───main
+│   │   ├───java
+│   │   │   └───se
+│   │   │       └───experis
+│   │   │           └───com
+│   │   │               └───mefit
+│   │   │                   ├───config
+│   │   │                   ├───controller
+│   │   │                   ├───mapper
+│   │   │                   │   ├───abstracts
+│   │   │                   │   └───implementations
+│   │   │                   ├───model
+│   │   │                   │   └───DTOs
+│   │   │                   │       ├───ExerciseDtos
+│   │   │                   │       ├───GoalDtos
+│   │   │                   │       ├───ProgramDtos
+│   │   │                   │       ├───UserDtos
+│   │   │                   │       └───WorkoutDtos
+│   │   │                   ├───repository
+│   │   │                   └───service
+│   │   │                       ├───implementations
+│   │   │                       └───interfaces
+│   │   └───resources
+│   └───test
+│       └───java
+│           └───se
+│               └───experis
+│                   └───com
+│                       └───mefit
+└───target
+├───classes
+│   └───se
+│       └───experis
+│           └───com
+│               └───mefit
+│                   ├───config
+│                   ├───controller
+│                   ├───mapper
+│                   │   ├───abstracts
+│                   │   └───implementations
+│                   ├───model
+│                   │   └───DTOs
+│                   │       ├───ExerciseDtos
+│                   │       ├───GoalDtos
+│                   │       ├───ProgramDtos
+│                   │       ├───UserDtos
+│                   │       └───WorkoutDtos
+│                   ├───repository
+│                   └───service
+│                       ├───implementations
+│                       └───interfaces
+└───generated-sources
+└───annotations
+```
 <br>
 
 ## Features
@@ -89,7 +150,7 @@ _Project tree will be printed here_
 </div>
 <br>
 <div align="center">
-<center><img src=" " alt="ER Diagram"/></center>
+<center><img src="assets/imgs/meFitDb - backend ER.png" alt="ER Diagram"/></center>
 </div>
 <br>
 
