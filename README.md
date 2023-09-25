@@ -70,8 +70,6 @@ Join us today and experience the power of MeFIT as your trusted companion to a f
 
 ## Project Structure
 
-_Project tree will be printed here_
-
 ```Bash
 ├───.mvn
 │   └───wrapper
@@ -294,7 +292,7 @@ OS name: "mac os x", version: "10.8.5", arch: "x86_64", family: "mac"
     - In IntelliJ IDEA, navigate to `SpringWebApiApplication.java` class.
     - Right-click on the class and select "Run 'MefitApplication'".
 
-![img.png](img.png)
+![img.png](assets/imgs/run_app.jpg)
 
 5. **Access API Documentation**:
     - Open your web browser and go to [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) to
@@ -329,7 +327,7 @@ documentation of the tools used or consult the project's maintainers for assista
 </div>
 <br>
 <div align="center">
-  <center><img src="https://gitlab.com/ediz_genc/fullstack-java-db-spring-web-api/-/raw/main/assets/fullstack-java-db-spring-web-api-class-diagram.jpg?ref_type=heads" alt="Class Diagram"/></center>
+  <center><img src="assets/imgs/mefit-backend-classdiagram.png" alt="Class Diagram"/></center>
 </div>
 <br>
 
